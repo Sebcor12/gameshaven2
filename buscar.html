@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resultados de Búsqueda | Games Haven</title>
+  <meta name="description" content="Encuentra tus juegos, consolas y accesorios favoritos en Games Haven. Explora nuestros resultados de búsqueda." />
+  <meta property="og:title" content="Resultados de Búsqueda | Games Haven" />
+  <meta property="og:description" content="Encuentra tus juegos, consolas y accesorios favoritos en Games Haven. Explora nuestros resultados de búsqueda." />
+  <meta property="og:image" content="https://www.tudominio.com/images/og-search-image.jpg" /> <meta property="og:url" content="https://www.tudominio.com/buscar.html" /> <link rel="icon" href="images/favicon.ico" type="image/x-icon" /> <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+  <style>
+    /* Estilos CSS personalizados (duplicados para cada página para simplificar, en un proyecto real irían en un archivo .css separado) */
+    :root {
+      --primary-color: #00aaff;
+      --secondary-color: #008ecc;
+      --dark-bg: #121212;
+      --card-bg: #1a1a1a;
+      --border-color: #2a2a2a;
+      --text-color: #e0e0e0;
+      --light-text: #c0c0c0;
+      --font-inter: 'Inter', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-inter);
+      background-color: var(--dark-bg);
+      color: var(--text-color);
+    }
+    
+    .base-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+
+    .base-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      border-color: var(--primary-color);
+    }
+
+    .product-card {
+      composes: base-card;
+    }
+
+    .product-card .card-img-top {
+      object-fit: cover;
+      width: 100%;
+      height: 200px; /* Altura fija para las imágenes de productos */
+    }
+    .product-card .card-body {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card .card-body .btn {
+      margin-top: auto;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+    .btn-primary:hover {
+      background-color: var(--secondary-color);
+    }
+    .section-title {
+      font-weight: bold;
+      color: #fff;
+      border-left: 5px solid var(--primary-color);
+      padding-left: 1rem;
+      margin-bottom: 2rem;
+    }
+    
+    .add-to-cart.added {
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+    .add-to-cart.added:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+    }
+    .cart-item-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .quantity-input {
+        width: 50px;
+        text-align: center;
+        background-color: #2a2a2a;
+        color: var(--text-color);
+        border: 1px solid #444;
+        border-radius: 5px;
+    }
+    .cart-footer-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .info-message {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .product-card .card-title {
+        font-size: 1rem;
+      }
+      .section-title {
+        font-size: 1.25rem;
+      }
+      .navbar-collapse {
+        background-color: #2a2a2a;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 0.5rem;
+      }
+      .navbar-nav .nav-item {
+        margin-bottom: 0.5rem;
+      }
+      .navbar-nav .nav-link {
+        padding-left: 0;
+      }
+      .navbar-brand {
+        font-size: 1.5rem;
+      }
+      .d-flex.form-control {
+        width: 100%;
+      }
+      .d-flex.form-control .btn {
+        margin-top: 10px;
+        width: 100%;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" href="index.html">Games Haven</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownJuegos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Juegos
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownJuegos">
+              <li><a class="dropdown-item" href="accion.html">Acción</a></li>
+              <li><a class="dropdown-item" href="rpg.html">RPG</a></li>
+              <li><a class="dropdown-item" href="estrategia.html">Estrategia</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="juegos.html">Todos los Juegos</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="consolas.html">Consolas</a></li>
+          <li class="nav-item"><a class="nav-link" href="accesorios.html">Accesorios</a></li>
+          <li class="nav-item"><a class="nav-link" href="ofertas.html">Ofertas</a></li>
+          <li class="nav-item"><a class="nav-link" href="proximos-lanzamientos.html">Próximos Lanzamientos</a></li>
+          <li class="nav-item"><a class="nav-link" href="noticias.html">Noticias</a></li>
+          <li class="nav-item"><a class="nav-link" href="quienes-somos.html">Quiénes Somos</a></li>
+          <li class="nav-item"><a class="nav-link" href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+        </ul>
+        <form class="d-flex" role="search" action="buscar.html" method="GET">
+          <input class="form-control me-2 bg-secondary text-white border-0" type="search" placeholder="Buscar juegos, consolas..." aria-label="Buscar" name="q" id="search-input-nav">
+          <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <button class="btn btn-outline-light ms-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar" aria-controls="cartSidebar" aria-label="Ver Carrito">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="badge bg-danger ms-1" id="cart-count">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <header class="py-4 text-center bg-dark text-white">
+    <h1 class="fs-2"><i class="fas fa-search"></i> Resultados de Búsqueda</h1>
+    <p class="fs-6" id="search-query-display">Mostrando resultados para: "<span id="display-query-text"></span>"</p>
+  </header>
+
+  <main class="container py-5">
+    <section id="search-results-section" class="mb-5">
+      <h2 class="section-title">🔍 Productos encontrados</h2>
+      <div id="results-container" class="row g-4">
+        <div id="no-results-message" class="col-12 info-message text-center" style="display: none;">
+          <p class="lead">No se encontraron resultados para tu búsqueda.</p>
+          <p>Intenta con otras palabras clave o explora nuestras categorías:</p>
+          <a href="juegos.html" class="btn btn-outline-primary m-2">Juegos</a>
+          <a href="consolas.html" class="btn btn-outline-primary m-2">Consolas</a>
+          <a href="accesorios.html" class="btn btn-outline-primary m-2">Accesorios</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <div class="offcanvas offcanvas-end bg-dark text-white" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
+    <div class="offcanvas-header border-bottom border-secondary">
+      <h5 class="offcanvas-title" id="cartSidebarLabel">🛒 Tu Carrito</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column">
+      <div id="cart-items-container" class="flex-grow-1">
+        <p id="cart-empty-msg" class="text-white-50">Tu carrito está vacío.</p>
+        <ul id="cart-list" class="list-group mb-3">
+        </ul>
+      </div>
+      <div class="border-top border-secondary pt-3 cart-footer-controls">
+        <div class="d-flex justify-content-between fw-bold mb-3 fs-5">
+          <span>Total:</span>
+          <span id="cart-total">$0.00</span>
+        </div>
+        <button id="checkout" class="btn btn-success w-100 mb-2">Finalizar Compra</button>
+        <button id="clear-cart" class="btn btn-outline-danger w-100">Vaciar Carrito</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-center text-white py-4 mt-auto">
+    <div class="container">
+      <p class="mb-1">&copy; 2025 Games Haven. Todos los derechos reservados.</p>
+      <div class="d-flex justify-content-center gap-3">
+        <a href="#" class="text-white" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="text-white" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="text-white" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="#" class="text-white" aria-label="Discord"><i class="fab fa-discord"></i></a>
+      </div>
+      <div class="mt-3">
+        <h6>Métodos de Pago Aceptados</h6>
+        <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa" width="40" class="mx-1">
+        <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard" width="40" class="mx-1">
+        <img src="https://img.icons8.com/color/48/000000/paypal.png" alt="PayPal" width="40" class="mx-1">
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+  <script>
+    // Inicializa las animaciones AOS
+    AOS.init();
+
+    // Lógica de Búsqueda (Front-end simulado)
+    document.addEventListener('DOMContentLoaded', function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const query = urlParams.get('q'); // Obtiene el valor del parámetro 'q' de la URL
+      const displayQueryText = document.getElementById('display-query-text');
+      const searchResultsContainer = document.getElementById('results-container');
+      const noResultsMessage = document.getElementById('no-results-message');
+      const searchInputNav = document.getElementById('search-input-nav');
+
+      // Actualiza la barra de búsqueda de navegación con la consulta actual
+      if (searchInputNav && query) {
+        searchInputNav.value = query;
+      }
+
+      // Base de datos de productos simulada (en un proyecto real vendría de un backend)
+      const allProducts = [
+        { id: 'cyberpunk-ps5', name: 'Cyberpunk 2077 (PS5)', category: 'juego', platform: 'ps5', price: 49.99, image: 'https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_box_art.jpg' },
+        { id: 'elden-ring-pc', name: 'Elden Ring (PC)', category: 'juego', platform: 'pc', price: 59.99, image: 'https://image.api.playstation.com/vulcan/ap/rnd/202110/2000/vQ9x5P94T8V2gM91g5G11XfW.png' },
+        { id: 'zelda-switch', name: 'The Legend of Zelda: Tears of the Kingdom (Switch)', category: 'juego', platform: 'switch', price: 69.99, image: 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_auto/c_scale,w_700/Games/Nintendo%20Switch/The%20Legend%20of%20Zelda%20Tears%20of%20the%20Kingdom/06_ToTK_Game_Tile_1?itok=383oVvXJ' },
+        { id: 'ps5-console', name: 'PlayStation 5 Consola', category: 'consola', platform: 'ps5', price: 499.99, image: 'https://gmedia.playstation.com/is/image/SIEPDC/ps5-product-thumbnail-01-en-14sep21?$facebook$' },
+        { id: 'xbox-series-x', name: 'Xbox Series X Consola', category: 'consola', platform: 'xbox', price: 499.99, image: 'https://compass-ssl.xbox.com/assets/f4/62/f462a632-1ce8-490b-93ca-a38f6b21c437.png?n=Xbox-Series-X-S-Standard-0_RGB_CMYK_Boxshot-Console_01_794x447.png' },
+        { id: 'nintendo-switch', name: 'Nintendo Switch OLED', category: 'consola', platform: 'switch', price: 349.99, image: 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_auto/c_scale,w_700/Games/Nintendo%20Switch/Nintendo%20Switch%20OLED%20Model/02_NSOLED_Unit_White_1?itok=W2P4k9_e' },
+        { id: 'mando-ps5', name: 'DualSense Wireless Controller (PS5)', category: 'accesorio', platform: 'ps5', price: 69.99, image: 'https://gmedia.playstation.com/is/image/SIEPDC/dualsense-controller-product-thumbnail-01-en-14sep21?$facebook$' },
+        { id: 'headset-xbox', name: 'Xbox Wireless Headset', category: 'accesorio', platform: 'xbox', price: 99.99, image: 'https://compass-ssl.xbox.com/assets/2b/bb/2bbb8c8c-6638-4b72-ac14-04149021e179.png?n=xbox-wireless-headset-glp-image-mobile-4_850x850.png' },
+        { id: 'juego-accion-1', name: 'Doom Eternal (PC)', category: 'juego', platform: 'pc', price: 29.99, image: 'https://upload.wikimedia.org/wikipedia/en/9/9c/Doom_Eternal_cover_art.jpg' },
+        { id: 'juego-rpg-1', name: 'The Witcher 3: Wild Hunt (PC)', category: 'juego', platform: 'pc', price: 19.99, image: 'https://upload.wikimedia.org/wikipedia/en/0/0c/Witcher_3_cover_art.jpg' },
+        { id: 'juego-estrategia-1', name: 'Starcraft II (PC)', category: 'juego', platform: 'pc', price: 0.00, image: 'https://upload.wikimedia.org/wikipedia/en/d/d4/StarCraft_II_Legacy_of_the_Void_cover.jpg' },
+      ];
+
+      function displayResults(searchTerm) {
+        displayQueryText.textContent = searchTerm || "todos los productos"; // Muestra la consulta
+        searchResultsContainer.innerHTML = ''; // Limpia resultados anteriores
+        noResultsMessage.style.display = 'none'; // Oculta el mensaje de "no resultados"
+
+        const lowerCaseSearchTerm = searchTerm ? searchTerm.toLowerCase() : '';
+        
+        const filteredProducts = allProducts.filter(product => {
+          // Si no hay término de búsqueda, muestra todos los productos
+          if (!lowerCaseSearchTerm) return true;
+
+          // Busca en nombre, categoría y plataforma
+          return product.name.toLowerCase().includes(lowerCaseSearchTerm) ||
+                 product.category.toLowerCase().includes(lowerCaseSearchTerm) ||
+                 product.platform.toLowerCase().includes(lowerCaseSearchTerm);
+        });
+
+        if (filteredProducts.length === 0) {
+          noResultsMessage.style.display = 'block';
+        } else {
+          filteredProducts.forEach(product => {
+            const productHtml = `
+              <div class="col-6 col-md-4 col-lg-3 product-item" 
+                   data-product-name="${product.name.toLowerCase()}" 
+                   data-product-category="${product.category.toLowerCase()}" 
+                   data-product-platform="${product.platform.toLowerCase()}">
+                <div class="card product-card">
+                  <img src="${product.image}" class="card-img-top" alt="${product.name}" loading="lazy">
+                  <div class="card-body">
+                    <h5 class="card-title">${product.name}</h5>
+                    <p class="card-text text-muted">${product.category.charAt(0).toUpperCase() + product.category.slice(1)} / ${product.platform.toUpperCase()}</p>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                      <span class="fw-bold fs-5 text-primary">$${product.price.toFixed(2)}</span>
+                    </div>
+                    <button class="btn btn-primary add-to-cart w-100" 
+                            data-product-id="${product.id}" 
+                            data-product-name="${product.name}" 
+                            data-product-price="${product.price.toFixed(2)}">
+                      <i class="fas fa-cart-plus me-1"></i> Añadir al Carrito
+                    </button>
+                  </div>
+                </div>
+              </div>
+            `;
+            searchResultsContainer.insertAdjacentHTML('beforeend', productHtml);
+          });
+        }
+      }
+
+      // Muestra los resultados al cargar la página
+      displayResults(query);
+
+      // Lógica del Carrito (este script debe estar en TODAS las páginas que usen el carrito)
+      const cartList = document.getElementById('cart-list');
+      const cartEmptyMessage = document.getElementById('cart-empty-msg');
+      const cartTotal = document.getElementById('cart-total');
+      const clearCartBtn = document.getElementById('clear-cart');
+      const checkoutBtn = document.getElementById('checkout');
+      const cartCountBadge = document.getElementById('cart-count');
+      const cartFooterControls = document.querySelector('.cart-footer-controls');
+
+      let cart = []; // Array para gestionar los ítems del carrito
+
+      function saveCart() {
+        try {
+          localStorage.setItem('gamesCart', JSON.stringify(cart));
+        } catch (e) {
+          console.error("Error al guardar en localStorage:", e);
+        }
+      }
+
+      function loadCart() {
+        try {
+          cart = JSON.parse(localStorage.getItem('gamesCart') || '[]');
+        } catch (e) {
+          console.error("Error al cargar de localStorage, se reinicia el carrito:", e);
+          cart = [];
+        }
+        renderCart();
+        updateCartState();
+        updateTotal();
+        updateCartCount();
+      }
+
+      function renderCart() {
+        cartList.innerHTML = '';
+        if (cart.length === 0) {
+          cartEmptyMessage.style.display = 'block';
+        } else {
+          cartEmptyMessage.style.display = 'none';
+          cart.forEach(item => {
+            const li = document.createElement('li');
+            li.className = 'list-group-item bg-transparent text-white d-flex justify-content-between align-items-center border-secondary';
+            li.dataset.productId = item.id;
+
+            li.innerHTML = `
+              <span class="w-50">${item.name}</span>
+              <div class="cart-item-controls">
+                <button class="btn btn-sm btn-outline-light decrease-quantity" data-product-id="${item.id}">-</button>
+                <input type="number" class="quantity-input" value="${item.quantity}" min="1" readonly>
+                <button class="btn btn-sm btn-outline-light increase-quantity" data-product-id="${item.id}">+</button>
+                <strong class="price ms-2">$${(item.price * item.quantity).toFixed(2)}</strong>
+                <button class="btn btn-sm btn-danger remove-item" data-product-id="${item.id}">&times;</button>
+              </div>
+            `;
+            cartList.appendChild(li);
+          });
+        }
+      }
+
+      function addToCart(productId, productName, productPrice) {
+        let existingItem = cart.find(item => item.id === productId);
+        const priceValue = parseFloat(productPrice);
+
+        if (existingItem) {
+          existingItem.quantity++;
+        } else {
+          cart.push({ id: productId, name: productName, price: priceValue, quantity: 1 });
+        }
+
+        saveCart();
+        renderCart();
+        updateCartState();
+        updateTotal();
+        updateCartCount();
+        
+        // Opcional: Cambiar el texto del botón a "Añadido!" por un breve periodo
+        const addButton = document.querySelector(`.add-to-cart[data-product-id="${productId}"]`);
+        if (addButton) {
+          addButton.textContent = 'Añadido!';
+          addButton.classList.add('added');
+          setTimeout(() => {
+            addButton.textContent = 'Añadir al Carrito';
+            addButton.classList.remove('added');
+          }, 1500);
+        }
+      }
+
+      function updateCartState() {
+        if (cart.length > 0) {
+          cartEmptyMessage.style.display = 'none';
+          cartFooterControls.style.display = 'flex';
+        } else {
+          cartEmptyMessage.style.display = 'block';
+          cartFooterControls.style.display = 'none';
+        }
+      }
+
+      function updateTotal() {
+        let total = 0;
+        cart.forEach(item => {
+          total += item.price * item.quantity;
+        });
+        cartTotal.textContent = `$${total.toFixed(2)}`;
+      }
+
+      function updateCartCount() {
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCountBadge.textContent = totalItems;
+        cartCountBadge.style.display = totalItems > 0 ? 'inline-block' : 'none';
+      }
+
+      // Event listener para los botones "Añadir al Carrito" en los resultados de búsqueda
+      searchResultsContainer.addEventListener('click', function(e) {
+        if (e.target.classList.contains('add-to-cart')) {
+          const productId = e.target.dataset.productId;
+          const productName = e.target.dataset.productName;
+          const productPrice = e.target.dataset.productPrice;
+          addToCart(productId, productName, productPrice);
+        }
+      });
+
+      cartList.addEventListener('click', function (e) {
+        const productId = e.target.dataset.productId;
+        if (!productId) return;
+
+        let itemIndex = cart.findIndex(item => item.id === productId);
+        if (itemIndex === -1) return;
+
+        if (e.target.classList.contains('remove-item')) {
+          cart.splice(itemIndex, 1);
+          e.target.closest('li').remove();
+        } else if (e.target.classList.contains('increase-quantity')) {
+          cart[itemIndex].quantity++;
+        } else if (e.target.classList.contains('decrease-quantity')) {
+          if (cart[itemIndex].quantity > 1) {
+            cart[itemIndex].quantity--;
+          } else {
+            cart.splice(itemIndex, 1);
+            e.target.closest('li').remove();
+          }
+        }
+        
+        saveCart();
+        renderCart();
+        updateCartState();
+        updateTotal();
+        updateCartCount();
+      });
+      
+      clearCartBtn.addEventListener('click', function () {
+        cart = [];
+        saveCart();
+        renderCart();
+        updateCartState();
+        updateTotal();
+        updateCartCount();
+      });
+
+      checkoutBtn.addEventListener('click', function () {
+        if (cart.length > 0) {
+          alert('¡Gracias por tu compra! Serás redirigido a la página de pago.');
+          cart = [];
+          saveCart();
+          renderCart();
+          updateCartState();
+          updateTotal();
+          updateCartCount();
+          const cartOffcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('cartSidebar'));
+          if (cartOffcanvas) cartOffcanvas.hide();
+        } else {
+          alert('Tu carrito está vacío. Añade productos antes de finalizar la compra.');
+        }
+      });
+
+      loadCart();
+    });
+  </script>
+</body>
+</html>

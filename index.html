@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Games Haven | Tu Destino para Videojuegos y Consolas</title>
+  <meta name="description" content="Explora Games Haven, tu tienda online #1 para videojuegos, consolas y accesorios. ¡Las mejores ofertas y los últimos lanzamientos te esperan!" />
+  <meta name="keywords" content="videojuegos, consolas, juegos, games, haven, tienda online, ps5, xbox, nintendo switch, accesorios, ofertas, lanzamientos" />
+  
+  <meta property="og:title" content="Games Haven | Tu Destino para Videojuegos y Consolas" />
+  <meta property="og:description" content="Explora Games Haven, tu tienda online #1 para videojuegos, consolas y accesorios. ¡Las mejores ofertas y los últimos lanzamientos te esperan!" />
+  <meta property="og:image" content="images/og-image-games-haven.jpg" /> <meta property="og:url" content="https://www.tudominio.com/" /> <meta property="og:type" content="website" />
+  
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" /> <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+  <style>
+    /* Variables CSS para facilitar la personalización y la temática */
+    :root {
+      --primary-color: #00eaff; /* Cian brillante / Neón */
+      --secondary-color: #00a0d0; /* Azul más oscuro para hover */
+      --dark-bg: #0a0a0a; /* Fondo muy oscuro, casi negro */
+      --card-bg: #1a1a1a; /* Fondo de tarjetas */
+      --border-color: #2a2a2a; /* Color de borde sutil */
+      --text-color: #e0e0e0; /* Color de texto general */
+      --light-text: #b0b0b0; /* Texto más claro para descripciones */
+      --font-heading: 'Orbitron', sans-serif; /* Fuente futurista para títulos */
+      --font-body: 'Inter', sans-serif; /* Fuente legible para el cuerpo */
+      --glow-shadow: 0 0 8px var(--primary-color), 0 0 15px var(--primary-color); /* Efecto de brillo */
+      --glow-shadow-s: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--dark-bg);
+      color: var(--text-color);
+      overflow-x: hidden; /* Evita el scroll horizontal */
+    }
+
+    /* Navbar y elementos de interacción */
+    .navbar {
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 10px rgba(0, 234, 255, 0.15); /* Sombra sutil de neón */
+    }
+    .navbar-brand {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      text-shadow: 0 0 5px var(--primary-color); /* Efecto neón en el logo */
+    }
+    .navbar-nav .nav-link {
+      color: var(--text-color) !important;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+      position: relative;
+      padding-bottom: 5px; /* Espacio para el borde inferior */
+    }
+    .navbar-nav .nav-link:hover {
+      color: var(--primary-color) !important;
+      text-shadow: var(--glow-shadow-s);
+    }
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover::after {
+      width: 100%;
+    }
+    .navbar-toggler {
+      border-color: var(--primary-color);
+    }
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 234, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    .form-control.bg-secondary {
+      background-color: #333 !important;
+      border: 1px solid var(--primary-color) !important;
+      color: var(--text-color) !important;
+    }
+    .btn-outline-primary {
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+      transition: all 0.3s ease;
+    }
+    .btn-outline-primary:hover {
+      background-color: var(--primary-color);
+      color: var(--dark-bg);
+      box-shadow: var(--glow-shadow-s);
+    }
+    .btn-outline-light {
+      color: var(--text-color);
+      border-color: var(--text-color);
+    }
+    .btn-outline-light:hover {
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+      background-color: transparent;
+      box-shadow: var(--glow-shadow-s);
+    }
+    .dropdown-menu.dropdown-menu-dark {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+    }
+    .dropdown-item {
+      color: var(--text-color);
+    }
+    .dropdown-item:hover {
+      background-color: var(--primary-color);
+      color: var(--dark-bg);
+    }
+
+
+    /* Tarjetas base y productos */
+    .base-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+
+    .base-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6), var(--glow-shadow-s);
+      border-color: var(--primary-color);
+    }
+
+    .product-card .card-img-top {
+      object-fit: cover;
+      width: 100%;
+      height: 200px;  
+      border-bottom: 1px solid var(--border-color);
+    }
+    .product-card .card-body {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 1.25rem;
+    }
+    .product-card .card-title {
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    .product-card .card-text {
+      color: var(--light-text);
+      font-size: 0.9rem;
+    }
+    .product-card .price {
+      font-weight: bold;
+      color: var(--primary-color);
+      text-shadow: 0 0 3px var(--primary-color);
+    }
+    .product-card .btn {
+      margin-top: auto;
+      border-radius: 8px;
+    }
+
+    .category-card {
+      composes: base-card;
+      text-align: center;
+      padding: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .category-card i {
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease, text-shadow 0.3s ease;
+    }
+    .category-card:hover i {
+      transform: scale(1.1);
+      text-shadow: var(--glow-shadow);
+      color: var(--primary-color);
+    }
+    .category-card h4 {
+      font-family: var(--font-heading);
+      color: var(--text-color);
+      transition: color 0.3s ease;
+    }
+    .category-card:hover h4 {
+      color: var(--primary-color);
+    }
+
+    .testimonial-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      color: var(--light-text);
+      font-style: italic;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    .testimonial-card .fas.fa-quote-left {
+      color: var(--primary-color);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 5px var(--primary-color);
+    }
+    .testimonial-author {
+      font-weight: bold;
+      color: var(--text-color);
+      margin-top: 1rem;
+      font-family: var(--font-heading);
+    }
+    .swiper-pagination-bullet {
+      background-color: var(--light-text);
+    }
+    .swiper-pagination-bullet-active {
+      background-color: var(--primary-color);
+    }
+
+    /* Botones principales */
+    .btn-primary {
+      background-color: var(--primary-color);
+      border: none;
+      color: var(--dark-bg); /* Texto oscuro en botón brillante */
+      font-weight: bold;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    }
+    .btn-primary:hover {
+      background-color: var(--secondary-color);
+      box-shadow: var(--glow-shadow);
+      transform: translateY(-2px);
+    }
+    /* Estilos para el estado "Añadido" al carrito */
+    .add-to-cart.added {
+      background-color: #28a745; /* Verde */
+      border-color: #28a745;
+      color: white; /* Texto blanco para botón verde */
+    }
+    .add-to-cart.added:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+      box-shadow: none; /* Quitamos el brillo si ya está añadido */
+    }
+
+    /* Secciones y Títulos */
+    .section-title {
+      font-family: var(--font-heading);
+      font-weight: bold;
+      color: #fff;
+      border-left: 5px solid var(--primary-color);
+      padding-left: 1.5rem;
+      margin-bottom: 3rem;
+      text-shadow: 0 0 5px var(--primary-color); /* Brillo en los títulos de sección */
+    }
+    .bg-secondary.bg-opacity-10 {
+      background-color: rgba(42, 42, 42, 0.5) !important; /* Un gris oscuro transparente para la sección */
+      border: 1px solid var(--border-color);
+      box-shadow: 0 0 15px rgba(0, 234, 255, 0.1); /* Brillo sutil para la sección */
+    }
+    .cta-banner {
+      background: linear-gradient(45deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: var(--dark-bg);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+    .cta-banner h2 {
+      font-family: var(--font-heading);
+      font-weight: 900;
+    }
+    .cta-banner .btn-light {
+      background-color: var(--dark-bg);
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .cta-banner .btn-light:hover {
+      background-color: var(--card-bg);
+      color: var(--primary-color);
+      box-shadow: var(--glow-shadow);
+      transform: translateY(-3px) scale(1.02);
+    }
+
+    /* Offcanvas del Carrito */
+    .offcanvas-header {
+        border-bottom: 1px solid var(--primary-color);
+        box-shadow: 0 2px 5px rgba(0, 234, 255, 0.1);
+    }
+    .offcanvas-body {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+    }
+    .cart-item {
+        background-color: var(--dark-bg);
+        border: 1px solid var(--border-color);
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .cart-item-info {
+        flex-grow: 1;
+        margin-right: 10px;
+    }
+    .cart-item-info h6 {
+        margin-bottom: 5px;
+        color: var(--primary-color);
+    }
+    .cart-item-info span {
+        font-size: 0.9em;
+        color: var(--light-text);
+    }
+    .cart-item-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .quantity-input {
+        width: 50px;
+        text-align: center;
+        background-color: #2a2a2a;
+        color: var(--text-color);
+        border: 1px solid var(--primary-color);
+        border-radius: 5px;
+    }
+    .cart-footer-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .badge {
+      font-size: 0.75em;  
+      vertical-align: super;
+      background-color: var(--primary-color) !important;
+      color: var(--dark-bg) !important;
+      font-weight: bold;
+    }
+    .btn-success {
+      background-color: #28a745 !important;
+      border-color: #28a745 !important;
+    }
+    .btn-success:hover {
+      background-color: #218838 !important;
+      border-color: #218838 !important;
+      box-shadow: 0 0 8px rgba(40, 167, 69, 0.5);
+    }
+    .btn-outline-danger {
+      border-color: #dc3545 !important;
+      color: #dc3545 !important;
+    }
+    .btn-outline-danger:hover {
+      background-color: #dc3545 !important;
+      color: white !important;
+      box-shadow: 0 0 8px rgba(220, 53, 69, 0.5);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      box-shadow: 0 -2px 10px rgba(0, 234, 255, 0.15);
+    }
+    footer a {
+      color: var(--text-color);
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    footer a:hover {
+      color: var(--primary-color);
+      transform: translateY(-3px);
+      text-shadow: var(--glow-shadow-s);
+    }
+    footer img {
+      filter: grayscale(100%) brightness(1.5); /* Iconos de pago más sutiles en modo oscuro */
+      transition: filter 0.3s ease;
+    }
+    footer img:hover {
+      filter: grayscale(0%) brightness(1); /* Color completo al hover */
+    }
+
+    /* =================================
+        ESTILOS PARA EL NUEVO HERO SWIPER
+        ================================= */
+    .hero-swiper-section {
+      overflow: hidden; /* Evita cualquier desbordamiento visual */
+      margin-bottom: 4rem;
+    }
+
+    .swiper.hero-swiper {
+      width: 100%;
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+
+    .swiper.hero-swiper .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 70%; /* Ancho de la diapositiva central */
+      height: 500px;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end; /* Alinea el contenido abajo */
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      border: 2px solid var(--border-color);
+    }
+
+    .swiper.hero-swiper .swiper-slide::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 100%); /* Gradiente para legibilidad */
+    }
+
+    .hero-slide-content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+      color: #fff;
+      text-align: center;
+      width: 100%;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--primary-color);
+      text-shadow: var(--glow-shadow);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--light-text);
+      margin-bottom: 1.5rem;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    }
+
+    /* Media Queries para Responsive Design */
+    @media (max-width: 992px) {
+      .navbar-collapse {
+        background-color: var(--dark-bg);
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 0.5rem;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      }
+      .navbar-nav .nav-item {
+        margin-bottom: 0.5rem;
+      }
+      .navbar-nav .nav-link {
+        padding-left: 0.75rem;
+        border-left: 3px solid transparent;
+        transition: border-left-color 0.3s ease;
+      }
+      .navbar-nav .nav-link:hover {
+        border-left-color: var(--primary-color);
+      }
+      .navbar-brand {
+        font-size: 1.5rem;
+      }
+      .section-title {
+        font-size: 1.75rem;
+      }
+      .cta-banner h2 {
+        font-size: 1.8rem;
+      }
+      .cta-banner p {
+        font-size: 1rem;
+      }
+      .cta-banner .btn {
+        font-size: 1rem;
+      }
+      .product-card .card-img-top {
+        height: 180px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .swiper.hero-swiper .swiper-slide {
+        width: 85%;
+        height: 450px;
+      }
+      .hero-title {
+        font-size: 2rem;
+      }
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .section-title {
+        font-size: 1.5rem;
+        padding-left: 1rem;
+      }
+      .product-card .card-img-top {
+        height: 150px;
+      }
+      .product-card .card-body {
+        padding: 1rem;
+      }
+      .product-card .card-title {
+        font-size: 1.1rem;
+      }
+      .product-card .price {
+        font-size: 1.2rem;
+      }
+      .cta-banner {
+        padding: 2rem;
+      }
+      .cta-banner h2 {
+        font-size: 1.5rem;
+      }
+      .cta-banner p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" href="index.html">
+        <img src="dist/imagen/logo-removebg-preview.png" alt="Games Haven Logo" class="me-2" style="height: 35px; vertical-align: middle;">
+        Games Haven
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownJuegos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Juegos
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownJuegos">
+              <li><a class="dropdown-item" href="accion.html">Acción</a></li>
+              <li><a class="dropdown-item" href="rpg.html">RPG</a></li>
+              <li><a class="dropdown-item" href="estrategia.html">Estrategia</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="juegos.html">Todos los Juegos</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="consolas.html">Consolas</a></li>
+          <li class="nav-item"><a class="nav-link" href="accesorios.html">Accesorios</a></li>
+          <li class="nav-item"><a class="nav-link" href="ofertas.html">Ofertas</a></li>
+          <li class="nav-item"><a class="nav-link" href="proximos-lanzamientos.html">Próximos Lanzamientos</a></li>
+          <li class="nav-item"><a class="nav-link" href="noticias.html">Noticias</a></li>
+          <li class="nav-item"><a class="nav-link" href="quienes-somos.html">Quiénes Somos</a></li>
+          <li class="nav-item"><a class="nav-link" href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+        </ul>
+        <form class="d-flex" role="search" action="buscar.html" method="GET">
+          <input class="form-control me-2 bg-secondary text-white border-0" type="search" placeholder="Buscar juegos, consolas..." aria-label="Buscar" name="q">
+          <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <button class="btn btn-outline-light ms-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar" aria-controls="cartSidebar" aria-label="Ver Carrito">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="badge bg-danger ms-1" id="cart-count">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="hero-swiper-section py-4">
+    <div class="swiper hero-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" style="background-image: url('images/carousel-bg-1.jpg');">
+          <div class="hero-slide-content">
+            <h2 class="hero-title">El Futuro del Gaming Ya Está Aquí</h2>
+            <p class="hero-subtitle">Descubre las consolas de última generación y sumérgete en mundos increíbles.</p>
+            <a href="consolas.html" class="btn btn-primary btn-lg mt-3">Ver Consolas</a>
+          </div>
+        </div>
+        <div class="swiper-slide" style="background-image: url('images/carousel-bg-2.jpg');">
+          <div class="hero-slide-content">
+            <h2 class="hero-title">Los Más Esperados: ¡Disponibles Ahora!</h2>
+            <p class="hero-subtitle">No te quedes sin los títulos que marcan la diferencia. ¡Compra ya!</p>
+            <a href="juegos.html" class="btn btn-primary btn-lg mt-3">Ver Juegos</a>
+          </div>
+        </div>
+        <div class="swiper-slide" style="background-image: url('images/carousel-bg-3.jpg');">
+          <div class="hero-slide-content">
+            <h2 class="hero-title">Accesorios Esenciales para Gamers Pro</h2>
+            <p class="hero-subtitle">Auriculares, mandos, teclados... todo para tu setup definitivo.</p>
+            <a href="accesorios.html" class="btn btn-primary btn-lg mt-3">Explorar Accesorios</a>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+
+  <main class="container py-5">
+    <section id="featured-categories" class="mb-5">
+      <h2 class="section-title" data-aos="fade-right">Explora el Universo Games Haven</h2>
+      <div class="row g-4 text-center">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <a href="juegos.html" class="text-decoration-none">
+            <div class="category-card">
+              <i class="fas fa-gamepad"></i>
+              <h4>Videojuegos</h4>
+              <p class="text-muted">Miles de títulos, desde clásicos hasta los últimos lanzamientos.</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <a href="consolas.html" class="text-decoration-none">
+            <div class="category-card">
+              <i class="fas fa-desktop"></i>
+              <h4>Consolas</h4>
+              <p class="text-muted">Las plataformas más potentes para una experiencia inmersiva.</p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <a href="accesorios.html" class="text-decoration-none">
+            <div class="category-card">
+              <i class="fas fa-headphones-alt"></i>
+              <h4>Accesorios</h4>
+              <p class="text-muted">Mejora tu juego con los mejores periféricos y equipamiento.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="featured-games" class="mb-5">
+      <h2 class="section-title" data-aos="fade-right">Juegos en la Mira</h2>
+      <div class="row g-4" id="games-container">
+        </div>
+      <div class="text-center mt-5" data-aos="fade-up">
+        <a href="juegos.html" class="btn btn-primary btn-lg">Ver Todos los Juegos <i class="fas fa-arrow-right ms-2"></i></a>
+      </div>
+    </section>
+
+    <section id="why-choose-us" class="mb-5 py-5 bg-secondary bg-opacity-10 rounded-4">
+      <h2 class="section-title text-center mb-5" data-aos="fade-down">Nuestra Misión: Tu Diversión</h2>
+      <div class="row g-4 text-center">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="base-card p-4 h-100">
+            <i class="fas fa-rocket fa-3x text-primary mb-3"></i>
+            <h5 class="fw-bold">Envío Super Veloz</h5>
+            <p class="text-light-text">Sabemos que quieres jugar YA. Tu pedido llega a la velocidad de la luz.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="base-card p-4 h-100">
+            <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+            <h5 class="fw-bold">Compra Segura Garantizada</h5>
+            <p class="text-light-text">Protección total en cada transacción y productos originales.</p>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="base-card p-4 h-100">
+            <i class="fas fa-star fa-3x text-primary mb-3"></i>
+            <h5 class="fw-bold">Experiencia Gamer Única</h5>
+            <p class="text-light-text">Contenido exclusivo, noticias y una comunidad de verdaderos gamers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="testimonials" class="mb-5">
+      <h2 class="section-title text-center mb-4" data-aos="fade-right">Dicen los Pro-Gamers</h2>
+      <div class="swiper-container testimonial-swiper" data-aos="fade-up">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <i class="fas fa-quote-left"></i>
+              <p>"Games Haven es mi **spawn point** para todo lo relacionado con videojuegos. ¡Siempre tienen lo último y al mejor precio!"</p>
+              <div class="testimonial-author">- Lucas "GamerPro" Torres</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <i class="fas fa-quote-left"></i>
+              <p>"La atención al cliente es de otro nivel. Me ayudaron a elegir la consola perfecta para mi hijo. ¡Un 10!"</p>
+              <div class="testimonial-author">- Ana "LaMamiGamer" Ríos</div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <i class="fas fa-quote-left"></i>
+              <p>"¡Por fin una tienda que entiende a los gamers de verdad! Gran catálogo y las ofertas son **brutales**."</p>
+              <div class="testimonial-author">- Javier "ElNinjaOculto" Solis</div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
+
+    ---
+    <section id="videos-destacados" class="mb-5 py-5 bg-secondary bg-opacity-10 rounded-4">
+        <h2 class="section-title text-center mb-5" data-aos="fade-down">Nuestros Videos Destacados</h2>
+        <div class="row justify-content-center g-4">
+            <div class="col-md-8 col-lg-6" data-aos="fade-up">
+                <div class="ratio ratio-16x9 base-card">
+                    <iframe src="https://www.youtube.com/embed/UypppJriT20" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <h5 class="text-center mt-3 text-primary">Trailer Oficial: Nuevo Título AAA</h5>
+            </div>
+            <div class="col-md-8 col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="ratio ratio-16x9 base-card">
+                    <iframe src="https://www.youtube.com/embed/kAu10bJIpNI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+                <h5 class="text-center mt-3 text-primary">Análisis Detallado: La Consola del Futuro</h5>
+            </div>
+            </div>
+        <div class="text-center mt-5" data-aos="fade-up">
+            <a href="videos.html" class="btn btn-primary btn-lg">Ver Toda la Galería <i class="fas fa-play-circle ms-2"></i></a>
+        </div>
+    </section>
+    ---
+
+    <section id="cta-banner" class="mb-5 p-5 text-center rounded-4 shadow-lg cta-banner" data-aos="zoom-in">
+        <h2 class="display-5 fw-bold mb-3">¡Desbloquea Contenido Exclusivo!</h2>
+        <p class="lead mb-4">Únete a nuestra comunidad y sé el primero en conocer los lanzamientos, ofertas y eventos especiales.</p>
+        <a href="#" class="btn btn-light btn-lg">¡Regístrate Ahora! <i class="fas fa-chevron-circle-right ms-2"></i></a>
+    </section>
+  </main>
+
+  <div class="offcanvas offcanvas-end bg-dark text-white" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title text-primary" id="cartSidebarLabel">🛒 Tu Carrito de Batalla</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column">
+      <div id="cart-items-container" class="flex-grow-1">
+        <p id="cart-empty-msg" class="text-white-50">Tu carrito está vacío. ¡Añade algunas armas!</p>
+        <ul id="cart-list" class="list-group mb-3">
+        </ul>
+      </div>
+      <div class="border-top border-secondary pt-3 cart-footer-controls">
+        <div class="d-flex justify-content-between fw-bold mb-3 fs-5">
+          <span>Total:</span>
+          <span id="cart-total">$0.00</span>
+        </div>
+        <button id="checkout" class="btn btn-success w-100 mb-2">Finalizar Misión</button>
+        <button id="clear-cart" class="btn btn-outline-danger w-100">Vaciar Inventario</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-center text-white py-4 mt-auto">
+    <div class="container">
+      <p class="mb-1">© 2025 Games Haven. Todos los derechos reservados. | Diseñado para Gamers</p>
+      <div class="d-flex justify-content-center gap-3 mt-2">
+        <a href="#" class="text-white" aria-label="Facebook"><i class="fab fa-facebook-f fa-lg"></i></a>
+        <a href="#" class="text-white" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
+        <a href="#" class="text-white" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+        <a href="#" class="text-white" aria-label="Discord"><i class="fab fa-discord fa-lg"></i></a>
+      </div>
+      <div class="mt-3">
+        <h6>Métodos de Pago Aceptados</h6>
+        <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa" width="40" class="mx-1">
+        <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard" width="40" class="mx-1">
+        <img src="https://img.icons8.com/color/48/000000/paypal.png" alt="PayPal" width="40" class="mx-1">
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+  <script>
+    // Inicializa las animaciones AOS
+    AOS.init({
+      duration: 1200, // duración de la animación
+      once: true,      // si las animaciones solo deben ocurrir una vez
+    });
+
+    // Inicializa Swiper para los testimonios
+    var swiper = new Swiper('.testimonial-swiper', {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+        },
+        992: {
+          slidesPerView: 3,
+        }
+      }
+    });
+
+    // Inicializa Swiper para el carrusel HERO
+    var heroSwiper = new Swiper('.hero-swiper', {
+      effect: 'coverflow',
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: 'auto',
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+
+    // Datos de productos destacados (esto simula una base de datos)
+    const featuredProducts = [
+      { id: 'elden-ring-pc', name: 'Elden Ring (PC)', price: 59.99, image: 'https://imgs.search.brave.com/hdjcLFDzv3zPsP519KiGlBMHouguatuogB7iylAWv2M/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/bmludGVuZG8uY29t/L2V1L21lZGlhL2lt/YWdlcy9hc3NldHMv/bmludGVuZG9fc3dp/dGNoXzJfZ2FtZXMv/ZWxkZW5yaW5ndGFy/bmlzaGVkZWRpdGlv/bi8yeDFfTlN3aXRj/aDJfRWxkZW5SaW5n/X2ltYWdlMTYwMHcu/anBn', description: 'Acción RPG, Mundo Abierto' },
+      { id: 'cyberpunk-ps5', name: 'Cyberpunk 2077 (PS5)', price: 49.99, image: 'https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_box_art.jpg', description: 'Acción/RPG Cyberpunk' },
+      { id: 'zelda-switch', name: 'Zelda: Tears of the Kingdom (Switch)', price: 69.99, image: 'https://imgs.search.brave.com/oVVHZC6vN3O-g7lb22UgvIfL0dFrfUxucHg9EwXlHvs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbS51/bmlxbG8uY29tL2ds/b2JhbC1jbXMvc3Bh/L3Jlc2M3ZDkwNzAw/MDY5Yjk5MmIxY2U0/MzYyMjJmNzk2MzM2/ZnIuanBn', description: 'Aventura Épica, Puzles' },
+      { id: 'halo-xbox', name: 'Halo Infinite (Xbox Series X)', price: 39.99, image: 'https://generacionxbox.com/wp-content/uploads/2023/10/halo-infinite.jpg', description: 'FPS, Ciencia Ficción' },
+      { id: 'spiderman-ps5', name: 'Spider-Man 2 (PS5)', price: 69.99, image: 'https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/2028edeaf4c0b60142550a3d6e024b6009853ceb9f51591e.jpg', description: 'Acción/Aventura, Superhéroes' },
+      { id: 'mariokart-switch', name: 'Mario Kart 8 Deluxe (Switch)', price: 49.99, image: 'https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000000153/de697f487a36d802dd9a5ff0341f717c8486221f2f1219b675af37aca63bc453', description: 'Carreras, Arcade' },
+      { id: 'gta-5-pc', name: 'Grand Theft Auto V (PC)', price: 29.99, image: 'https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png', description: 'Acción, Mundo Abierto' },
+      { id: 'fifa-24-ps5', name: 'EA Sports FC 24 (PS5)', price: 59.99, image: 'https://img.asmedia.epimg.net/resizer/v2/7B66CHJHANF5BLVXJZULE7EFUU.jpg?auth=0ad56d10161fe2193cf85369d3573f7162621dca329c7968a596236035549ca3&width=1472&height=1104&smart=true', description: 'Deportes, Fútbol' },
+    ];
+
+    // Función para cargar dinámicamente los juegos destacados
+    function loadFeaturedGames() {
+      const gamesContainer = document.getElementById('games-container');
+      gamesContainer.innerHTML = ''; // Limpiar cualquier contenido previo
+
+      // Randomiza y selecciona 4 productos para mostrar
+      const shuffled = [...featuredProducts].sort(() => 0.5 - Math.random());
+      const selectedGames = shuffled.slice(0, 4);
+
+      selectedGames.forEach((product, index) => {
+        const productCardHtml = `
+          <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="${index * 100}">
+            <div class="product-card base-card">
+              <img src="${product.image}" class="card-img-top" alt="${product.name}">
+              <div class="card-body">
+                <h5 class="card-title">${product.name}</h5>
+                <p class="card-text text-light-text">${product.description}</p>
+                <div class="d-flex justify-content-between align-items-center mt-auto pt-2">
+                  <span class="price fs-4">$${product.price.toFixed(2)}</span>
+                  <button class="btn btn-primary add-to-cart" data-product-id="${product.id}" data-product-name="${product.name}" data-product-price="${product.price.toFixed(2)}">
+                    Añadir <i class="fas fa-shopping-cart ms-1"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        gamesContainer.innerHTML += productCardHtml;
+      });
+      addCartListeners(); // Asegurarse de que los eventos se añadan después de cargar los productos
+    }
+
+    // Lógica del carrito
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function updateCartDisplay() {
+      const cartList = document.getElementById('cart-list');
+      const cartTotalSpan = document.getElementById('cart-total');
+      const cartCountBadge = document.getElementById('cart-count');
+      const cartEmptyMsg = document.getElementById('cart-empty-msg');
+
+      cartList.innerHTML = '';
+      let total = 0;
+      let itemCount = 0;
+
+      if (cart.length === 0) {
+        cartEmptyMsg.style.display = 'block';
+      } else {
+        cartEmptyMsg.style.display = 'none';
+        cart.forEach(item => {
+          total += item.price * item.quantity;
+          itemCount += item.quantity;
+
+          const cartItemDiv = document.createElement('li');
+          cartItemDiv.className = 'list-group-item cart-item';
+          cartItemDiv.innerHTML = `
+            <div class="cart-item-info">
+              <h6>${item.name}</h6>
+              <span>$${item.price.toFixed(2)} x ${item.quantity}</span>
+            </div>
+            <div class="cart-item-controls">
+              <button class="btn btn-sm btn-outline-light decrease-quantity" data-product-id="${item.id}">-</button>
+              <input type="number" class="form-control form-control-sm quantity-input" value="${item.quantity}" min="1" data-product-id="${item.id}" readonly>
+              <button class="btn btn-sm btn-outline-light increase-quantity" data-product-id="${item.id}">+</button>
+              <button class="btn btn-sm btn-outline-danger remove-from-cart" data-product-id="${item.id}">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          `;
+          cartList.appendChild(cartItemDiv);
+        });
+      }
+
+      cartTotalSpan.textContent = `$${total.toFixed(2)}`;
+      cartCountBadge.textContent = itemCount;
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function addCartListeners() {
+      document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.onclick = (event) => {
+          const id = event.target.dataset.productId;
+          const name = event.target.dataset.productName;
+          const price = parseFloat(event.target.dataset.productPrice);
+
+          const existingItem = cart.find(item => item.id === id);
+          if (existingItem) {
+            existingItem.quantity++;
+          } else {
+            cart.push({ id, name, price, quantity: 1 });
+          }
+          updateCartDisplay();
+          event.target.textContent = '¡Añadido!';
+          event.target.classList.add('added');
+          setTimeout(() => {
+            event.target.textContent = 'Añadir';
+            event.target.classList.remove('added');
+          }, 1500);
+        };
+      });
+
+      document.getElementById('cart-list').addEventListener('click', (event) => {
+        const target = event.target;
+        const productId = target.dataset.productId || target.closest('button')?.dataset.productId;
+
+        if (!productId) return;
+
+        const itemIndex = cart.findIndex(item => item.id === productId);
+        if (itemIndex === -1) return;
+
+        if (target.classList.contains('increase-quantity')) {
+          cart[itemIndex].quantity++;
+        } else if (target.classList.contains('decrease-quantity')) {
+          if (cart[itemIndex].quantity > 1) {
+            cart[itemIndex].quantity--;
+          } else {
+            cart.splice(itemIndex, 1); // Remove if quantity becomes 0
+          }
+        } else if (target.classList.contains('remove-from-cart') || target.closest('.remove-from-cart')) {
+          cart.splice(itemIndex, 1);
+        }
+        updateCartDisplay();
+      });
+    }
+
+    document.getElementById('clear-cart').onclick = () => {
+      cart = [];
+      updateCartDisplay();
+    };
+
+    document.getElementById('checkout').onclick = () => {
+      if (cart.length > 0) {
+        alert('¡Gracias por tu compra en Games Haven! Tu pedido está en camino.');
+        cart = [];
+        updateCartDisplay();
+        // Opcional: Cerrar el offcanvas
+        const offcanvasElement = document.getElementById('cartSidebar');
+        const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+        if (offcanvas) offcanvas.hide();
+      } else {
+        alert('Tu carrito está vacío. ¡Añade algunos productos antes de finalizar la compra!');
+      }
+    };
+
+    // Cargar los productos y actualizar el carrito al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+      loadFeaturedGames();
+      updateCartDisplay();
+    });
+  </script>
+</body>
+</html>

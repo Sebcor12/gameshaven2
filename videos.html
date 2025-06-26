@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Games Haven | Galería de Videos</title>
+  <meta name="description" content="Explora la galería de videos de Games Haven: trailers, reviews, gameplays y más sobre tus videojuegos y consolas favoritas." />
+  <meta name="keywords" content="videos, trailers, reviews, gameplays, videojuegos, consolas, games, haven" />
+  
+  <meta property="og:title" content="Games Haven | Galería de Videos" />
+  <meta property="og:description" content="Explora la galería de videos de Games Haven: trailers, reviews, gameplays y más." />
+  <meta property="og:image" content="images/og-image-videos.jpg" />
+  <meta property="og:url" content="https://www.tudominio.com/videos.html" />
+  <meta property="og:type" content="website" />
+  
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+  <style>
+    /* Variables CSS para facilitar la personalización y la temática */
+    :root {
+      --primary-color: #00eaff; /* Cian brillante / Neón */
+      --secondary-color: #00a0d0; /* Azul más oscuro para hover */
+      --dark-bg: #0a0a0a; /* Fondo muy oscuro, casi negro */
+      --card-bg: #1a1a1a; /* Fondo de tarjetas */
+      --border-color: #2a2a2a; /* Color de borde sutil */
+      --text-color: #e0e0e0; /* Color de texto general */
+      --light-text: #b0b0b0; /* Texto más claro para descripciones */
+      --font-heading: 'Orbitron', sans-serif; /* Fuente futurista para títulos */
+      --font-body: 'Inter', sans-serif; /* Fuente legible para el cuerpo */
+      --glow-shadow: 0 0 8px var(--primary-color), 0 0 15px var(--primary-color); /* Efecto de brillo */
+      --glow-shadow-s: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--dark-bg);
+      color: var(--text-color);
+      overflow-x: hidden; /* Evita el scroll horizontal */
+    }
+
+    /* Navbar y elementos de interacción */
+    .navbar {
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 10px rgba(0, 234, 255, 0.15); /* Sombra sutil de neón */
+    }
+    .navbar-brand {
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      text-shadow: 0 0 5px var(--primary-color); /* Efecto neón en el logo */
+    }
+    .navbar-nav .nav-link {
+      color: var(--text-color) !important;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+      position: relative;
+      padding-bottom: 5px; /* Espacio para el borde inferior */
+    }
+    .navbar-nav .nav-link:hover {
+      color: var(--primary-color) !important;
+      text-shadow: var(--glow-shadow-s);
+    }
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover::after {
+      width: 100%;
+    }
+    .navbar-toggler {
+      border-color: var(--primary-color);
+    }
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 234, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    .form-control.bg-secondary {
+      background-color: #333 !important;
+      border: 1px solid var(--primary-color) !important;
+      color: var(--text-color) !important;
+    }
+    .btn-outline-primary {
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+      transition: all 0.3s ease;
+    }
+    .btn-outline-primary:hover {
+      background-color: var(--primary-color);
+      color: var(--dark-bg);
+      box-shadow: var(--glow-shadow-s);
+    }
+    .btn-outline-light {
+      color: var(--text-color);
+      border-color: var(--text-color);
+    }
+    .btn-outline-light:hover {
+      color: var(--primary-color);
+      border-color: var(--primary-color);
+      background-color: transparent;
+      box-shadow: var(--glow-shadow-s);
+    }
+    .dropdown-menu.dropdown-menu-dark {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+    }
+    .dropdown-item {
+      color: var(--text-color);
+    }
+    .dropdown-item:hover {
+      background-color: var(--primary-color);
+      color: var(--dark-bg);
+    }
+
+
+    /* Tarjetas base y productos */
+    .base-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+
+    .base-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6), var(--glow-shadow-s);
+      border-color: var(--primary-color);
+    }
+
+    .product-card .card-img-top {
+      object-fit: cover;
+      width: 100%;
+      height: 200px;  
+      border-bottom: 1px solid var(--border-color);
+    }
+    .product-card .card-body {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 1.25rem;
+    }
+    .product-card .card-title {
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+    .product-card .card-text {
+      color: var(--light-text);
+      font-size: 0.9rem;
+    }
+    .product-card .price {
+      font-weight: bold;
+      color: var(--primary-color);
+      text-shadow: 0 0 3px var(--primary-color);
+    }
+    .product-card .btn {
+      margin-top: auto;
+      border-radius: 8px;
+    }
+
+    .category-card {
+      composes: base-card;
+      text-align: center;
+      padding: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .category-card i {
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease, text-shadow 0.3s ease;
+    }
+    .category-card:hover i {
+      transform: scale(1.1);
+      text-shadow: var(--glow-shadow);
+      color: var(--primary-color);
+    }
+    .category-card h4 {
+      font-family: var(--font-heading);
+      color: var(--text-color);
+      transition: color 0.3s ease;
+    }
+    .category-card:hover h4 {
+      color: var(--primary-color);
+    }
+
+    .testimonial-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      color: var(--light-text);
+      font-style: italic;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    .testimonial-card .fas.fa-quote-left {
+      color: var(--primary-color);
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 5px var(--primary-color);
+    }
+    .testimonial-author {
+      font-weight: bold;
+      color: var(--text-color);
+      margin-top: 1rem;
+      font-family: var(--font-heading);
+    }
+    .swiper-pagination-bullet {
+      background-color: var(--light-text);
+    }
+    .swiper-pagination-bullet-active {
+      background-color: var(--primary-color);
+    }
+
+    /* Botones principales */
+    .btn-primary {
+      background-color: var(--primary-color);
+      border: none;
+      color: var(--dark-bg); /* Texto oscuro en botón brillante */
+      font-weight: bold;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    }
+    .btn-primary:hover {
+      background-color: var(--secondary-color);
+      box-shadow: var(--glow-shadow);
+      transform: translateY(-2px);
+    }
+    /* Estilos para el estado "Añadido" al carrito */
+    .add-to-cart.added {
+      background-color: #28a745; /* Verde */
+      border-color: #28a745;
+      color: white; /* Texto blanco para botón verde */
+    }
+    .add-to-cart.added:hover {
+      background-color: #218838;
+      border-color: #1e7e34;
+      box-shadow: none; /* Quitamos el brillo si ya está añadido */
+    }
+
+    /* Secciones y Títulos */
+    .section-title {
+      font-family: var(--font-heading);
+      font-weight: bold;
+      color: #fff;
+      border-left: 5px solid var(--primary-color);
+      padding-left: 1.5rem;
+      margin-bottom: 3rem;
+      text-shadow: 0 0 5px var(--primary-color); /* Brillo en los títulos de sección */
+    }
+    .bg-secondary.bg-opacity-10 {
+      background-color: rgba(42, 42, 42, 0.5) !important; /* Un gris oscuro transparente para la sección */
+      border: 1px solid var(--border-color);
+      box-shadow: 0 0 15px rgba(0, 234, 255, 0.1); /* Brillo sutil para la sección */
+    }
+    .cta-banner {
+      background: linear-gradient(45deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: var(--dark-bg);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+    .cta-banner h2 {
+      font-family: var(--font-heading);
+      font-weight: 900;
+    }
+    .cta-banner .btn-light {
+      background-color: var(--dark-bg);
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .cta-banner .btn-light:hover {
+      background-color: var(--card-bg);
+      color: var(--primary-color);
+      box-shadow: var(--glow-shadow);
+      transform: translateY(-3px) scale(1.02);
+    }
+
+    /* Offcanvas del Carrito */
+    .offcanvas-header {
+        border-bottom: 1px solid var(--primary-color);
+        box-shadow: 0 2px 5px rgba(0, 234, 255, 0.1);
+    }
+    .offcanvas-body {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+    }
+    .cart-item {
+        background-color: var(--dark-bg);
+        border: 1px solid var(--border-color);
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    .cart-item-info {
+        flex-grow: 1;
+        margin-right: 10px;
+    }
+    .cart-item-info h6 {
+        margin-bottom: 5px;
+        color: var(--primary-color);
+    }
+    .cart-item-info span {
+        font-size: 0.9em;
+        color: var(--light-text);
+    }
+    .cart-item-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .quantity-input {
+        width: 50px;
+        text-align: center;
+        background-color: #2a2a2a;
+        color: var(--text-color);
+        border: 1px solid var(--primary-color);
+        border-radius: 5px;
+    }
+    .cart-footer-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .badge {
+      font-size: 0.75em;  
+      vertical-align: super;
+      background-color: var(--primary-color) !important;
+      color: var(--dark-bg) !important;
+      font-weight: bold;
+    }
+    .btn-success {
+      background-color: #28a745 !important;
+      border-color: #28a745 !important;
+    }
+    .btn-success:hover {
+      background-color: #218838 !important;
+      border-color: #218838 !important;
+      box-shadow: 0 0 8px rgba(40, 167, 69, 0.5);
+    }
+    .btn-outline-danger {
+      border-color: #dc3545 !important;
+      color: #dc3545 !important;
+    }
+    .btn-outline-danger:hover {
+      background-color: #dc3545 !important;
+      color: white !important;
+      box-shadow: 0 0 8px rgba(220, 53, 69, 0.5);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-color);
+      box-shadow: 0 -2px 10px rgba(0, 234, 255, 0.15);
+    }
+    footer a {
+      color: var(--text-color);
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    footer a:hover {
+      color: var(--primary-color);
+      transform: translateY(-3px);
+      text-shadow: var(--glow-shadow-s);
+    }
+    footer img {
+      filter: grayscale(100%) brightness(1.5); /* Iconos de pago más sutiles en modo oscuro */
+      transition: filter 0.3s ease;
+    }
+    footer img:hover {
+      filter: grayscale(0%) brightness(1); /* Color completo al hover */
+    }
+
+    /* =================================
+        ESTILOS PARA EL NUEVO HERO SWIPER
+        (se mantienen aunque no se use en esta página para consistencia)
+        ================================= */
+    .hero-swiper-section {
+      overflow: hidden; /* Evita cualquier desbordamiento visual */
+      margin-bottom: 4rem;
+    }
+
+    .swiper.hero-swiper {
+      width: 100%;
+      padding-top: 50px;
+      padding-bottom: 50px;
+    }
+
+    .swiper.hero-swiper .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 70%; /* Ancho de la diapositiva central */
+      height: 500px;
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end; /* Alinea el contenido abajo */
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+      border: 2px solid var(--border-color);
+    }
+
+    .swiper.hero-swiper .swiper-slide::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 100%); /* Gradiente para legibilidad */
+    }
+
+    .hero-slide-content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+      color: #fff;
+      text-align: center;
+      width: 100%;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--primary-color);
+      text-shadow: var(--glow-shadow);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--light-text);
+      margin-bottom: 1.5rem;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+    }
+
+    /* Media Queries para Responsive Design */
+    @media (max-width: 992px) {
+      .navbar-collapse {
+        background-color: var(--dark-bg);
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 0.5rem;
+        border: 1px solid var(--border-color);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      }
+      .navbar-nav .nav-item {
+        margin-bottom: 0.5rem;
+      }
+      .navbar-nav .nav-link {
+        padding-left: 0.75rem;
+        border-left: 3px solid transparent;
+        transition: border-left-color 0.3s ease;
+      }
+      .navbar-nav .nav-link:hover {
+        border-left-color: var(--primary-color);
+      }
+      .navbar-brand {
+        font-size: 1.5rem;
+      }
+      .section-title {
+        font-size: 1.75rem;
+      }
+      .cta-banner h2 {
+        font-size: 1.8rem;
+      }
+      .cta-banner p {
+        font-size: 1rem;
+      }
+      .cta-banner .btn {
+        font-size: 1rem;
+      }
+      .product-card .card-img-top {
+        height: 180px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .swiper.hero-swiper .swiper-slide {
+        width: 85%;
+        height: 450px;
+      }
+      .hero-title {
+        font-size: 2rem;
+      }
+      .hero-subtitle {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .section-title {
+        font-size: 1.5rem;
+        padding-left: 1rem;
+      }
+      .product-card .card-img-top {
+        height: 150px;
+      }
+      .product-card .card-body {
+        padding: 1rem;
+      }
+      .product-card .card-title {
+        font-size: 1.1rem;
+      }
+      .product-card .price {
+        font-size: 1.2rem;
+      }
+      .cta-banner {
+        padding: 2rem;
+      }
+      .cta-banner h2 {
+        font-size: 1.5rem;
+      }
+      .cta-banner p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-primary" href="index.html">Games Haven</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownJuegos" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Juegos
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownJuegos">
+              <li><a class="dropdown-item" href="accion.html">Acción</a></li>
+              <li><a class="dropdown-item" href="rpg.html">RPG</a></li>
+              <li><a class="dropdown-item" href="estrategia.html">Estrategia</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="juegos.html">Todos los Juegos</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="consolas.html">Consolas</a></li>
+          <li class="nav-item"><a class="nav-link" href="accesorios.html">Accesorios</a></li>
+          <li class="nav-item"><a class="nav-link" href="ofertas.html">Ofertas</a></li>
+          <li class="nav-item"><a class="nav-link" href="proximos-lanzamientos.html">Próximos Lanzamientos</a></li>
+          <li class="nav-item"><a class="nav-link" href="noticias.html">Noticias</a></li>
+          <li class="nav-item"><a class="nav-link" href="quienes-somos.html">Quiénes Somos</a></li>
+          <li class="nav-item"><a class="nav-link" href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+        </ul>
+        <form class="d-flex" role="search" action="buscar.html" method="GET">
+          <input class="form-control me-2 bg-secondary text-white border-0" type="search" placeholder="Buscar juegos, consolas..." aria-label="Buscar" name="q">
+          <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <button class="btn btn-outline-light ms-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#cartSidebar" aria-controls="cartSidebar" aria-label="Ver Carrito">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="badge bg-danger ms-1" id="cart-count">0</span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    <section id="video-gallery" class="mb-5 py-5 bg-secondary bg-opacity-10 rounded-4">
+      <h1 class="section-title text-center mb-5" data-aos="fade-down">Nuestra Galería de Videos</h1>
+      <p class="text-center lead mb-5 text-light-text" data-aos="fade-up" data-aos-delay="100">Explora los últimos trailers, reseñas de consolas, gameplays y tutoriales exclusivos de Games Haven.</p>
+      
+      <div class="row justify-content-center g-4" id="videos-container">
+      </div>
+
+      <div class="text-center mt-5" data-aos="fade-up">
+          <a href="index.html#videos-destacados" class="btn btn-outline-primary btn-lg">Regresar a Videos Destacados <i class="fas fa-arrow-left ms-2"></i></a>
+          <a href="juegos.html" class="btn btn-primary btn-lg ms-3">Explorar Juegos <i class="fas fa-gamepad ms-2"></i></a>
+      </div>
+    </section>
+  </main>
+
+  <div class="offcanvas offcanvas-end bg-dark text-white" tabindex="-1" id="cartSidebar" aria-labelledby="cartSidebarLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title text-primary" id="cartSidebarLabel">🛒 Tu Carrito de Batalla</h5>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column">
+      <div id="cart-items-container" class="flex-grow-1">
+        <p id="cart-empty-msg" class="text-white-50">Tu carrito está vacío. ¡Añade algunas armas!</p>
+        <ul id="cart-list" class="list-group mb-3">
+        </ul>
+      </div>
+      <div class="border-top border-secondary pt-3 cart-footer-controls">
+        <div class="d-flex justify-content-between fw-bold mb-3 fs-5">
+          <span>Total:</span>
+          <span id="cart-total">$0.00</span>
+        </div>
+        <button id="checkout" class="btn btn-success w-100 mb-2">Finalizar Misión</button>
+        <button id="clear-cart" class="btn btn-outline-danger w-100">Vaciar Inventario</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-dark text-center text-white py-4 mt-auto">
+    <div class="container">
+      <p class="mb-1">© 2025 Games Haven. Todos los derechos reservados. | Diseñado para Gamers</p>
+      <div class="d-flex justify-content-center gap-3 mt-2">
+        <a href="#" class="text-white" aria-label="Facebook"><i class="fab fa-facebook-f fa-lg"></i></a>
+        <a href="#" class="text-white" aria-label="Twitter"><i class="fab fa-twitter fa-lg"></i></a>
+        <a href="#" class="text-white" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+        <a href="#" class="text-white" aria-label="Discord"><i class="fab fa-discord fa-lg"></i></a>
+      </div>
+      <div class="mt-3">
+        <h6>Métodos de Pago Aceptados</h6>
+        <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa" width="40" class="mx-1">
+        <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard" width="40" class="mx-1">
+        <img src="https://img.icons8.com/color/48/000000/paypal.png" alt="PayPal" width="40" class="mx-1">
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+  <script>
+    // Inicializa las animaciones AOS
+    AOS.init({
+      duration: 1200, // duración de la animación
+      once: true,      // si las animaciones solo deben ocurrir una vez
+    });
+
+    // Datos de videos para la galería (puedes añadir o modificar esto)
+    const videosData = [
+      // Este URL ha sido verificado y es válido para incrustar el trailer de Elden Ring.
+      { id: 'game-trailer-1', title: 'Trailer Oficial: Elden Ring', embedUrl: 'https://www.youtube.com/embed/9SOnJrVPHJo', description: '¡Prepárate para la aventura más épica del año!' },
+      { id: 'console-review-2', title: 'Trailer Oficial: Grand Theft Auto VI ', embedUrl: 'https://www.youtube.com/embed/QdBZY2fkU-0', description: 'Un vistazo al nuevo juego de rockstar.' },
+      { id: 'gameplay-tips-3', title: 'PS5 vs Xbox Series X ', embedUrl: 'https://www.youtube.com/embed/0jOBMnbK0qM', description: 'Descubre trucos y estrategias de los mejores jugadores.' },
+      { id: 'accessory-spotlight-4', title: 'Top 5 Auriculares Gaming 2024', embedUrl: 'https://www.youtube.com/embed/wUaf3hIzyfg', description: 'Encuentra los auriculares perfectos para una inmersión total.' },
+      { id: 'indie-game-showcase-5', title: 'Joyas Ocultas: Juegos Indie que Debes Probar', embedUrl: 'https://www.youtube.com/embed/VXIrU97SuWc', description: 'Explora títulos independientes con historias únicas y jugabilidad innovadora.' },
+      { id: 'esports-moments-6', title: 'Los Mejores Momentos de eSports', embedUrl: 'https://www.youtube.com/embed/PFf9reYM8cU', description: 'Revive las jugadas más espectaculares y emocionantes del año.' },
+      { id: 'dev-diary-7', title: 'Tutorial de Trofeos/Logros: Consigue el 100% en: Elden ring', embedUrl: 'https://www.youtube.com/embed/jpXJ5cC1eCQ', description: 'Un vistazo detrás de cámaras a cómo se hacen tus juegos favoritos.' },
+      { id: 'retrogaming-8', title: 'Viaje al Pasado: Los Clásicos Imprescindibles', embedUrl: 'https://www.youtube.com/embed/LcBjBJ1Nra0', description: 'Recordamos los juegos que lo empezaron todo.' }
+    ];
+
+    // Función para cargar dinámicamente los videos
+    function loadVideoGallery() {
+      const videosContainer = document.getElementById('videos-container');
+      videosContainer.innerHTML = ''; // Limpiar cualquier contenido previo
+
+      videosData.forEach((video, index) => {
+        const videoCardHtml = `
+          <div class="col-12 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="${index * 100}">
+            <div class="base-card p-3">
+              <div class="ratio ratio-16x9 mb-3">
+                <iframe src="${video.embedUrl}" title="${video.title}" frameborder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              </div>
+              <h5 class="text-primary fw-bold mb-2">${video.title}</h5>
+              <p class="text-light-text mb-0">${video.description}</p>
+            </div>
+          </div>
+        `;
+        videosContainer.innerHTML += videoCardHtml;
+      });
+    }
+
+    // Lógica del carrito (copiada de index.html para mantener funcionalidad global)
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function updateCartDisplay() {
+      const cartList = document.getElementById('cart-list');
+      const cartTotalSpan = document.getElementById('cart-total');
+      const cartCountBadge = document.getElementById('cart-count');
+      const cartEmptyMsg = document.getElementById('cart-empty-msg');
+
+      cartList.innerHTML = '';
+      let total = 0;
+      let itemCount = 0;
+
+      if (cart.length === 0) {
+        cartEmptyMsg.style.display = 'block';
+      } else {
+        cartEmptyMsg.style.display = 'none';
+        cart.forEach(item => {
+          total += item.price * item.quantity;
+          itemCount += item.quantity;
+
+          const cartItemDiv = document.createElement('li');
+          cartItemDiv.className = 'list-group-item cart-item';
+          cartItemDiv.innerHTML = `
+            <div class="cart-item-info">
+              <h6>${item.name}</h6>
+              <span>$${item.price.toFixed(2)} x ${item.quantity}</span>
+            </div>
+            <div class="cart-item-controls">
+              <button class="btn btn-sm btn-outline-light decrease-quantity" data-product-id="${item.id}">-</button>
+              <input type="number" class="form-control form-control-sm quantity-input" value="${item.quantity}" min="1" data-product-id="${item.id}" readonly>
+              <button class="btn btn-sm btn-outline-light increase-quantity" data-product-id="${item.id}">+</button>
+              <button class="btn btn-sm btn-outline-danger remove-from-cart" data-product-id="${item.id}">
+                <i class="fas fa-trash-alt"></i>
+              </button>
+            </div>
+          `;
+          cartList.appendChild(cartItemDiv);
+        });
+      }
+
+      cartTotalSpan.textContent = `$${total.toFixed(2)}`;
+      cartCountBadge.textContent = itemCount;
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    // Nota: Los botones "Añadir al carrito" no existen en esta página, pero si en el futuro
+    // añades productos aquí, necesitarías la función addCartListeners().
+    // Por ahora, solo se manejan los eventos dentro del offcanvas.
+    document.getElementById('cart-list').addEventListener('click', (event) => {
+      const target = event.target;
+      const productId = target.dataset.productId || target.closest('button')?.dataset.productId;
+
+      if (!productId) return;
+
+      const itemIndex = cart.findIndex(item => item.id === productId);
+      if (itemIndex === -1) return;
+
+      if (target.classList.contains('increase-quantity')) {
+        cart[itemIndex].quantity++;
+      } else if (target.classList.contains('decrease-quantity')) {
+        if (cart[itemIndex].quantity > 1) {
+          cart[itemIndex].quantity--;
+        } else {
+          cart.splice(itemIndex, 1); // Remove if quantity becomes 0
+        }
+      } else if (target.classList.contains('remove-from-cart') || target.closest('.remove-from-cart')) {
+        cart.splice(itemIndex, 1);
+      }
+      updateCartDisplay();
+    });
+
+    document.getElementById('clear-cart').onclick = () => {
+      cart = [];
+      updateCartDisplay();
+    };
+
+    document.getElementById('checkout').onclick = () => {
+      if (cart.length > 0) {
+        alert('¡Gracias por tu compra en Games Haven! Tu pedido está en camino.');
+        cart = [];
+        updateCartDisplay();
+        const offcanvasElement = document.getElementById('cartSidebar');
+        const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+        if (offcanvas) offcanvas.hide();
+      } else {
+        alert('Tu carrito está vacío. ¡Añade algunos productos antes de finalizar la compra!');
+      }
+    };
+
+    // Cargar los videos y actualizar el carrito al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+      loadVideoGallery();
+      updateCartDisplay();
+    });
+  </script>
+</body>
+</html>
