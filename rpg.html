@@ -15,7 +15,6 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 
   <style>
-    /* Estilos CSS personalizados (duplicados para cada página para simplificar, en un proyecto real irían en un archivo .css separado) */
     :root {
       --primary-color: #00aaff;
       --secondary-color: #008ecc;
@@ -27,177 +26,46 @@
       --font-inter: 'Inter', sans-serif;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: var(--font-inter);
-      background-color: var(--dark-bg);
-      color: var(--text-color);
-    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-inter); background-color: var(--dark-bg); color: var(--text-color); }
     
-    .base-card {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.3s ease;
-    }
-
-    .base-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-      border-color: var(--primary-color);
-    }
-
-    .product-card {
-      composes: base-card;
-    }
-    .news-card {
-      composes: base-card;
-    }
-    .info-card {
-      composes: base-card;
-      padding: 2rem;
-    }
-
-    .product-card .card-body {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    .product-card .card-body .btn-primary {
-      margin-top: auto;
-    }
-    .product-card .card-img-top {
-      object-fit: cover;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 3 / 4; /* Para mantener consistencia en la altura de las imágenes */
-    }
-    .game-price {
-      color: var(--primary-color);
-      font-weight: bold;
-      font-size: 1.5rem;
-    }
-    .btn-primary {
-      background-color: var(--primary-color);
-      border: none;
-      transition: background-color 0.3s ease;
-    }
-    .btn-primary:hover {
-      background-color: var(--secondary-color);
-    }
-    .section-title {
-      font-weight: bold;
-      color: #fff;
-      border-left: 5px solid var(--primary-color);
-      padding-left: 1rem;
-      margin-bottom: 2rem;
-    }
+    .base-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); height: 100%; display: flex; flex-direction: column; transition: all 0.3s ease; }
+    .base-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.5); border-color: var(--primary-color); }
     
-    .add-to-cart.added {
-      background-color: #28a745;
-      border-color: #28a745;
-    }
-    .add-to-cart.added:hover {
-      background-color: #218838;
-      border-color: #1e7e34;
-    }
-    .cart-item-controls {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-    .quantity-input {
-        width: 50px;
-        text-align: center;
-        background-color: #2a2a2a;
-        color: var(--text-color);
-        border: 1px solid #444;
-        border-radius: 5px;
-    }
-    .cart-footer-controls {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
+    .product-card { cursor: pointer; }
+    .product-card .card-body { flex-grow: 1; display: flex; flex-direction: column; }
+    .product-card .card-body .btn-primary { margin-top: auto; }
+    .product-card .card-img-top { object-fit: cover; width: 100%; height: auto; aspect-ratio: 3 / 4; }
     
-    .info-card p, .info-card ul li {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        color: var(--light-text);
-    }
+    .game-price { color: var(--primary-color); font-weight: bold; font-size: 1.5rem; }
+    .btn-primary { background-color: var(--primary-color); border: none; transition: background-color 0.3s ease; }
+    .btn-primary:hover { background-color: var(--secondary-color); }
+    
+    .section-title { font-weight: bold; color: #fff; border-left: 5px solid var(--primary-color); padding-left: 1rem; margin-bottom: 2rem; }
+    
+    .add-to-cart.added, #modalAddToCartButton.added { background-color: #28a745; border-color: #28a745; }
+    .add-to-cart.added:hover, #modalAddToCartButton.added:hover { background-color: #218838; border-color: #1e7e34; }
+    
+    .cart-item-controls { display: flex; align-items: center; gap: 8px; }
+    .quantity-input { width: 50px; text-align: center; background-color: #2a2a2a; color: var(--text-color); border: 1px solid #444; border-radius: 5px; }
+    .cart-footer-controls { display: flex; flex-direction: column; gap: 10px; }
+    
+    .product-badge { position: absolute; top: 10px; right: 10px; background-color: #dc3545; color: white; padding: 5px 10px; border-radius: 8px; font-weight: bold; font-size: 0.9rem; z-index: 10; }
+    .product-badge.new { background-color: #0d6efd; }
+    .product-badge.bestseller { background-color: #ffc107; color: #333; }
+    
+    .star-rating { color: #ffc107; font-size: 1rem; margin-bottom: 0.5rem; }
+    .star-rating .far { color: #6c757d; }
 
-    .product-badge {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: #dc3545;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 8px;
-      font-weight: bold;
-      font-size: 0.9rem;
-      z-index: 10;
-    }
-    .product-badge.new {
-      background-color: #0d6efd;
-    }
-    .product-badge.bestseller {
-      background-color: #ffc107;
-      color: #333;
-    }
-
-    .star-rating {
-      color: #ffc107;
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-    }
-    .star-rating .far {
-      color: #6c757d;
-    }
-
+    .modal-content { background-color: var(--card-bg); border: 1px solid var(--primary-color); }
+    
     @media (max-width: 768px) {
-      .product-card .card-title {
-        font-size: 1rem;
-      }
-      .game-price {
-        font-size: 1.25rem;
-      }
-      .section-title {
-        font-size: 1.25rem;
-      }
-      .navbar-collapse {
-        background-color: #2a2a2a;
-        padding: 1rem;
-        border-radius: 8px;
-        margin-top: 0.5rem;
-      }
-      .navbar-nav .nav-item {
-        margin-bottom: 0.5rem;
-      }
-      .navbar-nav .nav-link {
-        padding-left: 0;
-      }
-      .navbar-brand {
-        font-size: 1.5rem;
-      }
-      .d-flex.form-control {
-        width: 100%;
-      }
-      .d-flex.form-control .btn {
-        margin-top: 10px;
-        width: 100%;
-      }
+      .product-card .card-title { font-size: 1rem; }
+      .game-price { font-size: 1.25rem; }
+      .section-title { font-size: 1.25rem; }
+      .navbar-collapse { background-color: #2a2a2a; padding: 1rem; border-radius: 8px; margin-top: 0.5rem; }
     }
   </style>
-  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
@@ -252,7 +120,7 @@
       <div class="row g-4" id="games-list-container">
         
         <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="card product-card position-relative">
+          <div class="card product-card position-relative" data-bs-toggle="modal" data-bs-target="#productDetailModal">
             <span class="product-badge bestseller">MÁS VENDIDO</span>
             <img src="dist/imagen/Thewitcher.webp" class="card-img-top" alt="The Witcher 3: Wild Hunt" loading="lazy">
             <div class="card-body">
@@ -267,7 +135,7 @@
         </div>
 
         <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="card product-card position-relative">
+          <div class="card product-card position-relative" data-bs-toggle="modal" data-bs-target="#productDetailModal">
             <span class="product-badge new">NUEVO</span>
             <img src="dist/imagen/elden ring.webp" class="card-img-top" alt="Elden Ring" loading="lazy">
             <div class="card-body">
@@ -282,7 +150,7 @@
         </div>
 
         <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="card product-card position-relative">
+          <div class="card product-card position-relative" data-bs-toggle="modal" data-bs-target="#productDetailModal">
             <img src="dist/imagen/Persona5.webp" class="card-img-top" alt="Persona 5 Royal" loading="lazy">
             <div class="card-body">
               <h5 class="card-title">Persona 5 Royal</h5>
@@ -296,7 +164,7 @@
         </div>
 
         <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="card product-card position-relative">
+          <div class="card product-card position-relative" data-bs-toggle="modal" data-bs-target="#productDetailModal">
             <img src="dist/imagen/FinalFantasy.webp" class="card-img-top" alt="Final Fantasy VII Remake Intergrade" loading="lazy">
             <div class="card-body">
               <h5 class="card-title">Final Fantasy VII Remake Intergrade</h5>
@@ -335,6 +203,36 @@
     </div>
   </div>
 
+  <div class="modal fade" id="productDetailModal" tabindex="-1" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="productDetailModalLabel">Detalles del Juego</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-4">
+            <div class="col-md-5">
+              <img id="modalProductImage" src="" alt="Imagen del Juego" class="img-fluid rounded-3">
+            </div>
+            <div class="col-md-7 d-flex flex-column">
+              <h3 id="modalProductName">Nombre del Juego</h3>
+              <div id="modalProductRating" class="mb-2"></div>
+              <p id="modalProductDescription" class="text-light-text flex-grow-1">Descripción detallada del juego.</p>
+              <div class="text-end">
+                <p class="game-price fs-2" id="modalProductPrice">$0.00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="modalAddToCartButton">Añadir al Carrito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <footer class="bg-dark text-center text-white py-4 mt-auto">
     <div class="container">
       <p class="mb-1">&copy; 2025 Games Haven. Todos los derechos reservados.</p>
@@ -358,11 +256,9 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
   <script>
-    // Inicializa las animaciones AOS
-    AOS.init();
-
-    // Lógica del Carrito (este script debe estar en TODAS las páginas que usen el carrito)
     document.addEventListener('DOMContentLoaded', function () {
+      AOS.init();
+
       const cartList = document.getElementById('cart-list');
       const cartEmptyMessage = document.getElementById('cart-empty-msg');
       const cartTotal = document.getElementById('cart-total');
@@ -371,43 +267,28 @@
       const cartCountBadge = document.getElementById('cart-count');
       const cartFooterControls = document.querySelector('.cart-footer-controls');
 
-      let cart = []; // Array para gestionar los ítems del carrito
+      let cart = [];
 
-      // Guarda el carrito en localStorage
       function saveCart() {
-        try {
-          localStorage.setItem('gamesCart', JSON.stringify(cart));
-        } catch (e) {
-          console.error("Error al guardar en localStorage:", e);
-        }
+        localStorage.setItem('gamesCart', JSON.stringify(cart));
       }
 
-      // Carga el carrito de localStorage y actualiza el DOM
       function loadCart() {
         try {
           cart = JSON.parse(localStorage.getItem('gamesCart') || '[]');
         } catch (e) {
-          console.error("Error al cargar de localStorage, se reinicia el carrito:", e);
           cart = [];
         }
         renderCart();
-        updateCartState();
-        updateTotal();
-        updateCartCount();
       }
 
-      // Renderiza (o vuelve a renderizar) todos los ítems en la barra lateral del carrito
       function renderCart() {
-        cartList.innerHTML = ''; // Limpia los ítems existentes
-        if (cart.length === 0) {
-          cartEmptyMessage.style.display = 'block';
-        } else {
-          cartEmptyMessage.style.display = 'none';
+        cartList.innerHTML = '';
+        if (cart.length > 0) {
           cart.forEach(item => {
             const li = document.createElement('li');
             li.className = 'list-group-item bg-transparent text-white d-flex justify-content-between align-items-center border-secondary';
             li.dataset.productId = item.id;
-
             li.innerHTML = `
               <span class="w-50">${item.name}</span>
               <div class="cart-item-controls">
@@ -421,9 +302,11 @@
             cartList.appendChild(li);
           });
         }
+        updateCartState();
+        updateTotal();
+        updateCartCount();
       }
 
-      // Añade un producto al carrito o incrementa su cantidad
       function addToCart(productId, productName, productPrice) {
         let existingItem = cart.find(item => item.id === productId);
         const priceValue = parseFloat(productPrice);
@@ -433,15 +316,10 @@
         } else {
           cart.push({ id: productId, name: productName, price: priceValue, quantity: 1 });
         }
-
         saveCart();
         renderCart();
-        updateCartState();
-        updateTotal();
-        updateCartCount();
       }
 
-      // Actualiza la visibilidad del mensaje de carrito vacío y los controles del pie
       function updateCartState() {
         if (cart.length > 0) {
           cartEmptyMessage.style.display = 'none';
@@ -452,36 +330,28 @@
         }
       }
 
-      // Calcula y actualiza el precio total en el carrito
       function updateTotal() {
-        let total = 0;
-        cart.forEach(item => {
-          total += item.price * item.quantity;
-        });
+        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
         cartTotal.textContent = `$${total.toFixed(2)}`;
       }
 
-      // Actualiza el número de ítems en la insignia del carrito
       function updateCartCount() {
         const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
         cartCountBadge.textContent = totalItems;
         cartCountBadge.style.display = totalItems > 0 ? 'inline-block' : 'none';
       }
 
-      // --- Event Listeners ---
-
-      // Añade evento a todos los botones "Comprar" o "Agregar al carrito"
       document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', function (e) {
           e.preventDefault();
+          e.stopPropagation(); // IMPORTANTE: Evita que el clic abra el modal
+
           const productId = e.target.dataset.productId;
           const productName = e.target.dataset.productName;
           const productPrice = e.target.dataset.productPrice;
-
           addToCart(productId, productName, productPrice);
 
-          // Feedback visual
-          const originalText = button.textContent;
+          const originalText = "Comprar";
           button.textContent = '¡Añadido!';
           button.classList.add('added');
           setTimeout(() => {
@@ -489,23 +359,19 @@
             button.classList.remove('added');
           }, 1500);
 
-          // Abre el carrito para mostrar el producto añadido
           const cartOffcanvas = new bootstrap.Offcanvas(document.getElementById('cartSidebar'));
           cartOffcanvas.show();
         });
       });
 
-      // Delegación de eventos para controles del ítem del carrito (eliminar, aumentar, disminuir)
       cartList.addEventListener('click', function (e) {
         const productId = e.target.dataset.productId;
         if (!productId) return;
-
         let itemIndex = cart.findIndex(item => item.id === productId);
         if (itemIndex === -1) return;
 
         if (e.target.classList.contains('remove-item')) {
           cart.splice(itemIndex, 1);
-          e.target.closest('li').remove();
         } else if (e.target.classList.contains('increase-quantity')) {
           cart[itemIndex].quantity++;
         } else if (e.target.classList.contains('decrease-quantity')) {
@@ -513,48 +379,71 @@
             cart[itemIndex].quantity--;
           } else {
             cart.splice(itemIndex, 1);
-            e.target.closest('li').remove();
           }
         }
-        
         saveCart();
         renderCart();
-        updateCartState();
-        updateTotal();
-        updateCartCount();
       });
-      
-      // Evento para vaciar todo el carrito
+
       clearCartBtn.addEventListener('click', function () {
         cart = [];
         saveCart();
         renderCart();
-        updateCartState();
-        updateTotal();
-        updateCartCount();
       });
 
-      // Evento para finalizar la compra
       checkoutBtn.addEventListener('click', function () {
         if (cart.length > 0) {
-          alert('¡Gracias por tu compra! Serás redirigido a la página de pago.');
-          // Aquí iría la redirección a una pasarela de pago real: window.location.href = 'pago.html';
-          
-          // Se vacía el carrito después de la compra simulada
+          alert('¡Gracias por tu compra!');
           cart = [];
           saveCart();
           renderCart();
-          updateCartState();
-          updateTotal();
-          updateCartCount();
           const cartOffcanvas = bootstrap.Offcanvas.getInstance(document.getElementById('cartSidebar'));
           if (cartOffcanvas) cartOffcanvas.hide();
         } else {
-          alert('Tu carrito está vacío. Añade productos antes de finalizar la compra.');
+          alert('Tu carrito está vacío.');
         }
       });
+      
+      // --- LÓGICA PARA EL MODAL ---
+      const productDetailModal = document.getElementById('productDetailModal');
+      productDetailModal.addEventListener('show.bs.modal', function (event) {
+          const card = event.relatedTarget;
+          
+          const name = card.querySelector('.card-title').textContent;
+          const imageSrc = card.querySelector('.card-img-top').src;
+          const price = card.querySelector('.game-price').textContent;
+          const ratingHtml = card.querySelector('.star-rating').innerHTML;
+          const productId = card.querySelector('.add-to-cart').dataset.productId;
+          const productPrice = card.querySelector('.add-to-cart').dataset.productPrice;
+          
+          productDetailModal.querySelector('#modalProductImage').src = imageSrc;
+          productDetailModal.querySelector('#modalProductImage').alt = name;
+          productDetailModal.querySelector('#modalProductName').textContent = name;
+          productDetailModal.querySelector('#modalProductPrice').textContent = price;
+          productDetailModal.querySelector('#modalProductRating').innerHTML = ratingHtml;
+          productDetailModal.querySelector('#modalProductDescription').textContent = `Embárcate en una aventura épica con ${name}. Forja tu leyenda en un mundo vasto lleno de misterios, peligros y personajes inolvidables.`;
+          
+          const modalAddToCartButton = productDetailModal.querySelector('#modalAddToCartButton');
+          modalAddToCartButton.dataset.productId = productId;
+          modalAddToCartButton.dataset.productName = name;
+          modalAddToCartButton.dataset.productPrice = productPrice;
+      });
 
-      // Carga inicial del carrito cuando la página se carga
+      document.getElementById('modalAddToCartButton').addEventListener('click', function(e) {
+          const button = e.target;
+          addToCart(button.dataset.productId, button.dataset.productName, button.dataset.productPrice);
+          
+          button.textContent = '¡Añadido!';
+          button.classList.add('added');
+          
+          setTimeout(() => {
+            button.textContent = 'Añadir al Carrito';
+            button.classList.remove('added');
+            const modalInstance = bootstrap.Modal.getInstance(productDetailModal);
+            modalInstance.hide();
+          }, 1500);
+      });
+
       loadCart();
     });
   </script>
