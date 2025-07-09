@@ -7,8 +7,11 @@
   <meta name="description" content="Planifica, comanda y conquista con nuestra selección de juegos de estrategia en Games Haven. Desarrolla tu ingenio en cada partida." />
   <meta property="og:title" content="Juegos de Estrategia | Games Haven" />
   <meta property="og:description" content="Planifica, comanda y conquista con nuestra selección de juegos de estrategia en Games Haven. Desarrolla tu ingenio en cada partida." />
-  <meta property="og:image" content="https://www.tudominio.com/images/og-estrategia-image.jpg" /> <meta property="og:url" content="https://www.tudominio.com/estrategia.html" /> <meta property="og:type" content="website" />
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon" /> <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <meta property="og:image" content="https://www.tudominio.com/images/og-estrategia-image.jpg" />
+  <meta property="og:url" content="https://www.tudominio.com/estrategia.html" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
@@ -57,6 +60,7 @@
 
     .product-card {
       composes: base-card;
+      cursor: pointer; /* Add cursor pointer to indicate it's clickable */
     }
     .news-card {
       composes: base-card;
@@ -101,11 +105,11 @@
       margin-bottom: 2rem;
     }
     
-    .add-to-cart.added {
+    .add-to-cart.added, #modalAddToCartButton.added { /* Add modalAddToCartButton.added */
       background-color: #28a745;
       border-color: #28a745;
     }
-    .add-to-cart.added:hover {
+    .add-to-cart.added:hover, #modalAddToCartButton.added:hover { /* Add modalAddToCartButton.added */
       background-color: #218838;
       border-color: #1e7e34;
     }
@@ -161,6 +165,12 @@
     }
     .star-rating .far {
       color: #6c757d;
+    }
+    
+    /* Styles for the modal */
+    .modal-content {
+      background-color: var(--card-bg);
+      border: 1px solid var(--primary-color);
     }
 
     @media (max-width: 768px) {
@@ -252,7 +262,7 @@
       <div class="row g-4" id="games-list-container">
         
         <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="card product-card position-relative">
+          <div class="card product-card position-relative" data-bs-toggle="modal" data-bs-target="#productDetailModal">
             <span class="product-badge bestseller">MÁS VENDIDO</span>
             <img src="dist/imagen/aoeiv.webp" class="card-img-top" alt="Age of Empires IV" loading="lazy">
             <div class="card-body">
@@ -267,7 +277,7 @@
         </div>
 
         <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="card product-card position-relative">
+          <div class="card product-card position-relative" data-bs-toggle="modal" data-bs-target="#productDetailModal">
             <img src="dist/imagen/Civilization7.webp" class="card-img-top" alt="Civilization VI" loading="lazy">
             <div class="card-body">
               <h5 class="card-title">Civilization VI</h5>
@@ -281,7 +291,7 @@
         </div>
 
         <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="card product-card position-relative">
+          <div class="card product-card position-relative" data-bs-toggle="modal" data-bs-target="#productDetailModal">
             <img src="dist/imagen/starcraft.webp" class="card-img-top" alt="StarCraft II: Wings of Liberty" loading="lazy">
             <div class="card-body">
               <h5 class="card-title">StarCraft II: Wings of Liberty</h5>
@@ -295,7 +305,7 @@
         </div>
 
         <div class="col-sm-6 col-md-4 col-lg-3">
-          <div class="card product-card position-relative">
+          <div class="card product-card position-relative" data-bs-toggle="modal" data-bs-target="#productDetailModal">
             <span class="product-badge new">NUEVO</span>
             <img src="dist/imagen/company-of-heroes-3-1.webp" class="card-img-top" alt="Company of Heroes 3" loading="lazy">
             <div class="card-body">
@@ -335,6 +345,36 @@
     </div>
   </div>
 
+  <div class="modal fade" id="productDetailModal" tabindex="-1" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="productDetailModalLabel">Detalles del Juego</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-4">
+            <div class="col-md-5">
+              <img id="modalProductImage" src="" alt="Imagen del Juego" class="img-fluid rounded-3">
+            </div>
+            <div class="col-md-7 d-flex flex-column">
+              <h3 id="modalProductName">Nombre del Juego</h3>
+              <div id="modalProductRating" class="mb-2"></div>
+              <p id="modalProductDescription" class="text-light-text flex-grow-1">Descripción detallada del juego.</p>
+              <div class="text-end">
+                <p class="game-price fs-2" id="modalProductPrice">$0.00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" id="modalAddToCartButton">Añadir al Carrito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <footer class="bg-dark text-center text-white py-4 mt-auto">
     <div class="container">
       <p class="mb-1">&copy; 2025 Games Haven. Todos los derechos reservados.</p>
@@ -361,8 +401,8 @@
     // Inicializa las animaciones AOS
     AOS.init();
 
-    // Lógica del Carrito (este script debe estar en TODAS las páginas que usen el carrito)
     document.addEventListener('DOMContentLoaded', function () {
+      // Lógica del Carrito (este script debe estar en TODAS las páginas que usen el carrito)
       const cartList = document.getElementById('cart-list');
       const cartEmptyMessage = document.getElementById('cart-empty-msg');
       const cartTotal = document.getElementById('cart-total');
@@ -474,6 +514,8 @@
       document.querySelectorAll('.add-to-cart').forEach(button => {
         button.addEventListener('click', function (e) {
           e.preventDefault();
+          e.stopPropagation(); // Prevents the card click from also triggering the modal
+
           const productId = e.target.dataset.productId;
           const productName = e.target.dataset.productName;
           const productPrice = e.target.dataset.productPrice;
@@ -481,7 +523,7 @@
           addToCart(productId, productName, productPrice);
 
           // Feedback visual
-          const originalText = button.textContent;
+          const originalText = "Comprar"; // Set original text explicitly
           button.textContent = '¡Añadido!';
           button.classList.add('added');
           setTimeout(() => {
@@ -552,6 +594,55 @@
         } else {
           alert('Tu carrito está vacío. Añade productos antes de finalizar la compra.');
         }
+      });
+
+      // --- LÓGICA PARA EL MODAL DE DETALLE DEL PRODUCTO ---
+      const productDetailModal = document.getElementById('productDetailModal');
+      productDetailModal.addEventListener('show.bs.modal', function (event) {
+          const card = event.relatedTarget; // The card that triggered the modal
+          
+          const name = card.querySelector('.card-title').textContent;
+          const imageSrc = card.querySelector('.card-img-top').src;
+          const price = card.querySelector('.game-price').textContent;
+          const ratingHtml = card.querySelector('.star-rating').innerHTML;
+          const productId = card.querySelector('.add-to-cart').dataset.productId;
+          const productPrice = card.querySelector('.add-to-cart').dataset.productPrice;
+          
+          // Populate modal content
+          productDetailModal.querySelector('#modalProductImage').src = imageSrc;
+          productDetailModal.querySelector('#modalProductImage').alt = name;
+          productDetailModal.querySelector('#modalProductName').textContent = name;
+          productDetailModal.querySelector('#modalProductPrice').textContent = price;
+          productDetailModal.querySelector('#modalProductRating').innerHTML = ratingHtml;
+          // You can customize this description based on the product
+          productDetailModal.querySelector('#modalProductDescription').textContent = `Sumérgete en el mundo estratégico de ${name}. Un juego que pondrá a prueba tu ingenio y habilidades tácticas.`;
+          
+          // Set data attributes for the "Add to Cart" button in the modal
+          const modalAddToCartButton = productDetailModal.querySelector('#modalAddToCartButton');
+          modalAddToCartButton.dataset.productId = productId;
+          modalAddToCartButton.dataset.productName = name;
+          modalAddToCartButton.dataset.productPrice = productPrice;
+
+          // Reset the button text and class in case it was previously "¡Añadido!"
+          modalAddToCartButton.textContent = 'Añadir al Carrito';
+          modalAddToCartButton.classList.remove('added');
+      });
+
+      // Event listener for the "Add to Cart" button inside the modal
+      document.getElementById('modalAddToCartButton').addEventListener('click', function(e) {
+          const button = e.target;
+          addToCart(button.dataset.productId, button.dataset.productName, button.dataset.productPrice);
+          
+          button.textContent = '¡Añadido!';
+          button.classList.add('added');
+          
+          setTimeout(() => {
+            button.textContent = 'Añadir al Carrito';
+            button.classList.remove('added');
+            // Hide the modal after adding to cart
+            const modalInstance = bootstrap.Modal.getInstance(productDetailModal);
+            if (modalInstance) modalInstance.hide();
+          }, 1500);
       });
 
       // Carga inicial del carrito cuando la página se carga
