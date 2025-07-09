@@ -140,6 +140,10 @@
       border-color: var(--primary-color);
     }
 
+    .product-card {
+        cursor: pointer;
+    }
+
     .product-card .card-img-top {
       object-fit: cover;
       width: 100%;
@@ -243,12 +247,12 @@
       transform: translateY(-2px);
     }
     /* Estilos para el estado "Añadido" al carrito */
-    .add-to-cart.added {
+    .add-to-cart.added, .add-to-cart-modal.added {
       background-color: #28a745; /* Verde */
       border-color: #28a745;
       color: white; /* Texto blanco para botón verde */
     }
-    .add-to-cart.added:hover {
+    .add-to-cart.added:hover, .add-to-cart-modal.added:hover {
       background-color: #218838;
       border-color: #1e7e34;
       box-shadow: none; /* Quitamos el brillo si ya está añadido */
@@ -368,6 +372,24 @@
       color: white !important;
       box-shadow: 0 0 8px rgba(220, 53, 69, 0.5);
     }
+
+    /* Modal de Detalles del Producto */
+    .modal-content {
+      background-color: var(--card-bg);
+      border: 1px solid var(--primary-color);
+      box-shadow: var(--glow-shadow);
+    }
+    .modal-header {
+      border-bottom: 1px solid var(--border-color);
+    }
+    .modal-footer {
+        border-top: 1px solid var(--border-color);
+    }
+    #modalProductImage {
+        border: 1px solid var(--border-color);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+    }
+
 
     /* Footer */
     footer {
@@ -762,6 +784,38 @@
     </div>
   </div>
 
+  <div class="modal fade" id="productDetailModal" tabindex="-1" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-primary" id="productDetailModalLabel">Detalles del Producto</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row g-4">
+            <div class="col-lg-5">
+              <img id="modalProductImage" src="" alt="Imagen del producto" class="img-fluid rounded-3">
+            </div>
+            <div class="col-lg-7 d-flex flex-column">
+              <h3 id="modalProductName" class="font-heading">Nombre del Producto</h3>
+              <p id="modalProductDescription" class="text-light-text flex-grow-1">Aquí va la descripción detallada del producto.</p>
+              <div class="d-flex justify-content-end align-items-center">
+                 <span class="price display-6" id="modalProductPrice">$0.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary add-to-cart-modal" id="modalAddToCartButton">
+            Añadir al Carrito <i class="fas fa-shopping-cart ms-1"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <footer class="bg-dark text-center text-white py-4 mt-auto">
     <div class="container">
       <p class="mb-1">© 2025 Games Haven. Todos los derechos reservados. | Diseñado para Gamers</p>
@@ -843,7 +897,7 @@
       { id: 'elden-ring-pc', name: 'Elden Ring (PC)', price: 59.99, image: 'https://imgs.search.brave.com/hdjcLFDzv3zPsP519KiGlBMHouguatuogB7iylAWv2M/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/bmludGVuZG8uY29t/L2V1L21lZGlhL2lt/YWdlcy9hc3NldHMv/bmludGVuZG9fc3dp/dGNoXzJfZ2FtZXMv/ZWxkZW5yaW5ndGFy/bmlzaGVkZWRpdGlv/bi8yeDFfTlN3aXRj/aDJfRWxkZW5SaW5n/X2ltYWdlMTYwMHcu/anBn', description: 'Acción RPG, Mundo Abierto' },
       { id: 'cyberpunk-ps5', name: 'Cyberpunk 2077 (PS5)', price: 49.99, image: 'https://upload.wikimedia.org/wikipedia/en/9/9f/Cyberpunk_2077_box_art.jpg', description: 'Acción/RPG Cyberpunk' },
       { id: 'zelda-switch', name: 'Zelda: Tears of the Kingdom (Switch)', price: 69.99, image: 'https://imgs.search.brave.com/oVVHZC6vN3O-g7lb22UgvIfL0dFrfUxucHg9EwXlHvs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbS51/bmlxbG8uY29tL2ds/b2JhbC1jbXMvc3Bh/L3Jlc2M3ZDkwNzAw/MDY5Yjk5MmIxY2U0/MzYyMjJmNzk2MzM2/ZnIuanBn', description: 'Aventura Épica, Puzles' },
-      { id: 'halo-xbox', name: 'Halo Infinite (Xbox Series X)', price: 39.99, image: 'https://imgs.search.brave.com/mz_s7l9aX2_jWHfTUk9Hh3NTnTrFv78xzZwJ-hBGlNc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tLm1l/ZGlhLWFtYXpvbi5j/b20vaW1hZ2VzL00v/TVY1Qk9URmhOVFU0/TXpJdFl6UTVPUzAw/TWpWaUxXRmxaVEl0/WW1NMk4yVmxOelkx/WkRjd1hrRXlYa0Zx/Y0djQC5qcGc', description: 'FPS, Ciencia Ficción' },
+      { id: 'halo-xbox', name: 'Halo Infinite (Xbox Series X)', price: 39.99, image: 'https://generacionxbox.com/wp-content/uploads/2023/10/halo-infinite.jpg', description: 'FPS, Ciencia Ficción' },
       { id: 'spiderman-ps5', name: 'Spider-Man 2 (PS5)', price: 69.99, image: 'https://image.api.playstation.com/vulcan/ap/rnd/202306/1219/2028edeaf4c0b60142550a3d6e024b6009853ceb9f51591e.jpg', description: 'Acción/Aventura, Superhéroes' },
       { id: 'mariokart-switch', name: 'Mario Kart 8 Deluxe (Switch)', price: 49.99, image: 'https://assets.nintendo.com/image/upload/c_fill,w_1200/q_auto:best/f_auto/dpr_2.0/ncom/software/switch/70010000000153/de697f487a36d802dd9a5ff0341f717c8486221f2f1219b675af37aca63bc453', description: 'Carreras, Arcade' },
       { id: 'gta-5-pc', name: 'Grand Theft Auto V (PC)', price: 29.99, image: 'https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png', description: 'Acción, Mundo Abierto' },
@@ -862,7 +916,7 @@
       selectedGames.forEach((product, index) => {
         const productCardHtml = `
           <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="${index * 100}">
-            <div class="product-card base-card">
+            <div class="product-card base-card" data-bs-toggle="modal" data-bs-target="#productDetailModal" data-product-id="${product.id}">
               <img src="${product.image}" class="card-img-top" alt="${product.name}">
               <div class="card-body">
                 <h5 class="card-title">${product.name}</h5>
@@ -928,27 +982,33 @@
       localStorage.setItem('cart', JSON.stringify(cart));
     }
 
+    function addToCart(id, name, price) {
+      const existingItem = cart.find(item => item.id === id);
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        cart.push({ id, name, price, quantity: 1 });
+      }
+      updateCartDisplay();
+    }
+
     function addCartListeners() {
       document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.onclick = (event) => {
+        button.addEventListener('click', (event) => {
+          event.stopPropagation(); // <-- IMPORTANTE: Evita que el modal se abra al hacer clic en este botón
           const id = event.target.dataset.productId;
           const name = event.target.dataset.productName;
           const price = parseFloat(event.target.dataset.productPrice);
 
-          const existingItem = cart.find(item => item.id === id);
-          if (existingItem) {
-            existingItem.quantity++;
-          } else {
-            cart.push({ id, name, price, quantity: 1 });
-          }
-          updateCartDisplay();
+          addToCart(id, name, price);
+          
           event.target.textContent = '¡Añadido!';
           event.target.classList.add('added');
           setTimeout(() => {
-            event.target.textContent = 'Añadir';
+            event.target.innerHTML = 'Añadir <i class="fas fa-shopping-cart ms-1"></i>';
             event.target.classList.remove('added');
           }, 1500);
-        };
+        });
       });
 
       document.getElementById('cart-list').addEventListener('click', (event) => {
@@ -985,7 +1045,6 @@
         alert('¡Gracias por tu compra en Games Haven! Tu pedido está en camino.');
         cart = [];
         updateCartDisplay();
-        // Opcional: Cerrar el offcanvas
         const offcanvasElement = document.getElementById('cartSidebar');
         const offcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
         if (offcanvas) offcanvas.hide();
@@ -993,6 +1052,46 @@
         alert('Tu carrito está vacío. ¡Añade algunos productos antes de finalizar la compra!');
       }
     };
+    
+    // --- LÓGICA DEL MODAL ---
+    const productDetailModal = document.getElementById('productDetailModal');
+    productDetailModal.addEventListener('show.bs.modal', function (event) {
+        const card = event.relatedTarget; // La tarjeta que activó el modal
+        const productId = card.getAttribute('data-product-id');
+        const product = featuredProducts.find(p => p.id === productId);
+
+        if (product) {
+            document.getElementById('modalProductName').textContent = product.name;
+            document.getElementById('modalProductImage').src = product.image;
+            document.getElementById('modalProductImage').alt = product.name;
+            document.getElementById('modalProductDescription').textContent = `Sumérgete en el universo de ${product.name}. Un título de ${product.description} que te promete horas de acción y aventura. ¡Consíguelo ahora en Games Haven!`;
+            document.getElementById('modalProductPrice').textContent = `$${product.price.toFixed(2)}`;
+            
+            const modalAddToCartButton = document.getElementById('modalAddToCartButton');
+            modalAddToCartButton.setAttribute('data-product-id', product.id);
+            modalAddToCartButton.setAttribute('data-product-name', product.name);
+            modalAddToCartButton.setAttribute('data-product-price', product.price.toFixed(2));
+        }
+    });
+
+    document.getElementById('modalAddToCartButton').addEventListener('click', function(event) {
+        const button = event.target;
+        const id = button.dataset.productId;
+        const name = button.dataset.productName;
+        const price = parseFloat(button.dataset.productPrice);
+        
+        addToCart(id, name, price);
+        
+        button.textContent = '¡Añadido!';
+        button.classList.add('added');
+        setTimeout(() => {
+            button.innerHTML = 'Añadir al Carrito <i class="fas fa-shopping-cart ms-1"></i>';
+            button.classList.remove('added');
+            const modalInstance = bootstrap.Modal.getInstance(productDetailModal);
+            modalInstance.hide();
+        }, 1500);
+    });
+
 
     // Cargar los productos y actualizar el carrito al cargar la página
     document.addEventListener('DOMContentLoaded', () => {
@@ -1001,4 +1100,5 @@
     });
   </script>
 </body>
+
 </html>
