@@ -288,19 +288,18 @@
 
       // Base de datos de productos simulada (en un proyecto real vendría de un backend)
       const allProducts = [
-        { id: 'cyberpunk-ps5', name: 'Cyberpunk 2077 (PS5)', category: 'juego', platform: 'ps5', price: 49.99, image: 'https://imgs.search.brave.com/EcLr90VFyvZ6H-gq-VLv7tqLruIojq8v9G0LpysWbMo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZS5qZXV4dmlkZW8u/Y29tL21lZGlhcy1z/bS8xNjM4MzUvMTYz/ODM1NDc2Mi00OTYx/LWphcXVldHRlLWF2/YW50LmdpZg.gif' },
-        { id: 'elden-ring-pc', name: 'Elden Ring (PC)', category: 'juego', platform: 'pc', price: 59.99, image: 'dist/imagen/elden-ring.webp' },
-        { id: 'zelda-switch', name: 'The Legend of Zelda: Tears of the Kingdom (Switch)', category: 'juego', platform: 'switch', price: 69.99, image: 'images/zelda-totk.jpg' },
-        { id: 'ps5-console', name: 'PlayStation 5 Consola', category: 'consola', platform: 'ps5', price: 499.99, image: 'https://gmedia.playstation.com/is/image/SIEPDC/ps5-product-thumbnail-01-en-14sep21?$facebook$' },
-        { id: 'xbox-series-x', name: 'Xbox Series X Consola', category: 'consola', platform: 'xbox', price: 499.99, image: 'https://compass-ssl.xbox.com/assets/f4/62/f462a632-1ce8-490b-93ca-a38f6b21c437.png?n=Xbox-Series-X-S-Standard-0_RGB_CMYK_Boxshot-Console_01_794x447.png' },
-        { id: 'nintendo-switch', name: 'Nintendo Switch OLED', category: 'consola', platform: 'switch', price: 349.99, image: 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_auto/c_scale,w_700/Games/Nintendo%20Switch/Nintendo%20Switch%20OLED%20Model/02_NSOLED_Unit_White_1?itok=W2P4k9_e' },
-        { id: 'mando-ps5', name: 'DualSense Wireless Controller (PS5)', category: 'accesorio', platform: 'ps5', price: 69.99, image: 'https://gmedia.playstation.com/is/image/SIEPDC/dualsense-controller-product-thumbnail-01-en-14sep21?$facebook$' },
-        { id: 'headset-xbox', name: 'Xbox Wireless Headset', category: 'accesorio', platform: 'xbox', price: 99.99, image: 'https://compass-ssl.xbox.com/assets/2b/bb/2bbb8c8c-6638-4b72-ac14-04149021e179.png?n=xbox-wireless-headset-glp-image-mobile-4_850x850.png' },
-        { id: 'juego-accion-1', name: 'Doom Eternal (PC)', category: 'juego', platform: 'pc', price: 29.99, image: 'https://upload.wikimedia.org/wikipedia/en/9/9c/Doom_Eternal_cover_art.jpg' },
-        { id: 'juego-rpg-1', name: 'The Witcher 3: Wild Hunt (PC)', category: 'juego', platform: 'pc', price: 19.99, image: 'https://upload.wikimedia.org/wikipedia/en/0/0c/Witcher_3_cover_art.jpg' },
-        { id: 'juego-estrategia-1', name: 'Starcraft II (PC)', category: 'juego', platform: 'pc', price: 0.00, image: 'https://upload.wikimedia.org/wikipedia/en/d/d4/StarCraft_II_Legacy_of_the_Void_cover.jpg' },
-      ];
-
+    { id: 'cyberpunk-ps5', name: 'Cyberpunk 2077 (PS5)', category: 'juego', platform: 'ps5', price: 49.99, image: 'https://imgs.search.brave.com/EcLr90VFyvZ6H-gq-VLv7tqLruIojq8v9G0LpysWbMo/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZS5qZXV4dmloZW8u/Y29tL21lZGlhcy1z/bS8xNjM4MzUvMTYz/ODM1NDc2Mi00OTYx/LWphcXVldHRlLWF2/YW50LmdpZg.gif' },
+    { id: 'elden-ring-pc', name: 'Elden Ring (PC)', category: 'juego', platform: 'pc', price: 59.99, image: 'https://upload.wikimedia.org/wikipedia/en/b/b2/Elden_Ring_cover_art.jpg' }, // Added a valid URL
+    { id: 'zelda-switch', name: 'The Legend of Zelda: Tears of the Kingdom (Switch)', category: 'juego', platform: 'switch', price: 69.99, image: './images/zelda-totk.jpg' }, // Changed to './images/' assuming images folder is at root
+    { id: 'ps5-console', name: 'PlayStation 5 Consola', category: 'consola', 'platform': 'ps5', price: 499.99, image: 'https://gmedia.playstation.com/is/image/SIEPDC/ps5-product-thumbnail-01-en-14sep21?$facebook$' },
+    { id: 'xbox-series-x', name: 'Xbox Series X Consola', category: 'consola', platform: 'xbox', price: 499.99, image: 'https://compass-ssl.xbox.com/assets/f4/62/f462a632-1ce8-490b-93ca-a38f6b21c437.png?n=Xbox-Series-X-S-Standard-0_RGB_CMYK_Boxshot-Console_01_794x447.png' },
+    { id: 'nintendo-switch', name: 'Nintendo Switch OLED', category: 'consola', platform: 'switch', price: 349.99, image: 'https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_auto/c_scale,w_700/Games/Nintendo%20Switch/Nintendo%20Switch%20OLED%20Model/02_NSOLED_Unit_White_1?itok=W2P4k9_e' },
+    { id: 'mando-ps5', name: 'DualSense Wireless Controller (PS5)', category: 'accesorio', platform: 'ps5', price: 69.99, image: 'https://gmedia.playstation.com/is/image/SIEPDC/dualsense-controller-product-thumbnail-01-en-14sep21?$facebook$' },
+    { id: 'headset-xbox', name: 'Xbox Wireless Headset', category: 'accesorio', platform: 'xbox', price: 99.99, image: 'https://compass-ssl.xbox.com/assets/2b/bb/2bbb8c8c-6638-4b72-ac14-04149021e179.png?n=xbox-wireless-headset-glp-image-mobile-4_850x850.png' },
+    { id: 'juego-accion-1', name: 'Doom Eternal (PC)', category: 'juego', platform: 'pc', price: 29.99, image: 'https://upload.wikimedia.org/wikipedia/en/9/9c/Doom_Eternal_cover_art.jpg' },
+    { id: 'juego-rpg-1', name: 'The Witcher 3: Wild Hunt (PC)', category: 'juego', platform: 'pc', price: 19.99, image: 'https://upload.wikimedia.org/wikipedia/en/0/0c/Witcher_3_cover_art.jpg' },
+    { id: 'juego-estrategia-1', name: 'Starcraft II (PC)', category: 'juego', platform: 'pc', price: 0.00, image: 'https://upload.wikimedia.org/wikipedia/en/d/d4/StarCraft_II_Legacy_of_the_Void_cover.jpg' },
+];
       function displayResults(searchTerm) {
         displayQueryText.textContent = searchTerm || "todos los productos"; // Muestra la consulta
         searchResultsContainer.innerHTML = ''; // Limpia resultados anteriores
